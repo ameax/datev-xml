@@ -185,7 +185,7 @@ class DatevDocumentData
         return $generator->getXmlString();
     }
 
-    public function generateZip()
+    public function generateZip(): string
     {
         $this->zip = new Zip();
         $this->zip->addFromString($this->generateXml(), 'document.xml');
@@ -208,7 +208,7 @@ class DatevDocumentData
         return $this->zip->getZipPath();
     }
 
-    private function addAdditionalFiles($filePaths): void
+    private function addAdditionalFiles(array $filePaths): void
     {
         foreach ($filePaths as $filePath) {
             $this->zip->addFile($filePath, basename($filePath));

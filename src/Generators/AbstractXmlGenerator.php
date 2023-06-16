@@ -14,6 +14,8 @@ abstract class AbstractXmlGenerator
 
     public string               $xsi = '{http://www.w3.org/2001/XMLSchema-instance}';
 
+    public string $ns = '';
+
     public function __construct()
     {
         $this->service = new Service();

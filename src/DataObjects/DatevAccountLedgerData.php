@@ -108,7 +108,7 @@ class DatevAccountLedgerData
     /**
      * @throws \Exception
      */
-    public function generateXml()
+    public function generateXml(): string
     {
         $generator = new DatevAccountLedgerXmlGenerator();
         $generator->setDatevAccountLedgerData($this);

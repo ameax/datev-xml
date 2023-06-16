@@ -2,16 +2,17 @@
 
 namespace Ameax\Datev\Serializers;
 
+use Ameax\Datev\Generators\DatevDocumentXmlGenerator;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
 class DatevDocumentRoot implements XmlSerializable
 {
-    public $value;
+    public array $value;
 
-    private $wrapper;
+    private DatevDocumentXmlGenerator $wrapper;
 
-    public function __construct($value, $wrapper)
+    public function __construct(array $value, DatevDocumentXmlGenerator $wrapper)
     {
         $this->value = $value;
         $this->wrapper = $wrapper;

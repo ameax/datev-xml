@@ -17,7 +17,7 @@ class DatevRepositoryData
         string $level1 = 'ameax',
         string $level2 = 'Import {year} {typeShort}',
         string $level3 = '{month}'
-    ): static {
+    ): DatevRepositoryData {
         return new DatevRepositoryData($level1, $level2, $level3);
     }
 
@@ -27,6 +27,7 @@ class DatevRepositoryData
             1 => $this->level1,
             2 => $this->level2,
             3 => $this->level3,
+            default => ''
         };
         $this->buildReplacementArray($data);
 
@@ -53,7 +54,7 @@ class DatevRepositoryData
         return array_values($this->replacementArray);
     }
 
-    private function buildReplacementArray($data): void
+    private function buildReplacementArray(array $data): void
     {
         $this->replacementArray = [
             'year' => $data['date']->format('Y'),
@@ -83,6 +84,7 @@ class DatevRepositoryData
             DatevDocumentData::TYPE_CASH_LEDGER => 'Kasse',
             DatevDocumentData::TYPE_FILE => 'Dateien',
             DatevDocumentData::TYPE_SEPA_FILE => 'Sepa',
+            default => ''
         };
     }
 }

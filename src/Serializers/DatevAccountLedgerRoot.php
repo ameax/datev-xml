@@ -8,11 +8,11 @@ use Sabre\Xml\XmlSerializable;
 
 class DatevAccountLedgerRoot implements XmlSerializable
 {
-    public $value;
+    public array $value;
 
     private DatevAccountLedgerXmlGenerator $generator;
 
-    public function __construct($value, DatevAccountLedgerXmlGenerator $generator)
+    public function __construct(array $value, DatevAccountLedgerXmlGenerator $generator)
     {
         $this->value = $value;
         $this->generator = $generator;

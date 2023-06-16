@@ -29,7 +29,7 @@ class DatevDocumentXmlGenerator extends AbstractXmlGenerator
         $root = new DatevDocumentRoot(
             [
                 'header' => [
-                    'date' => $this->datevDocumentData->date->format('Y-m-d\TH:i:s'),
+                    'date' => $this->datevDocumentData->date?->format('Y-m-d\TH:i:s'),
                 ],
                 'content' => $this->getContent(),
             ],
@@ -75,7 +75,7 @@ class DatevDocumentXmlGenerator extends AbstractXmlGenerator
         return DatevRepositoryData::getTypeLabel($type);
     }
 
-    private function getFileMainExtensionElement($documentData, string $fileAttribute = 'datafile'): array
+    private function getFileMainExtensionElement(array $documentData, string $fileAttribute = 'datafile'): array
     {
         return [
             'extension' => [
