@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xml.datev.de/bedi/tps/ledger/v060" xmlns:de="http://xml.datev.de/DD/DE/bedi/tps/ledger/v060" targetNamespace="http://xml.datev.de/bedi/tps/ledger/v060" elementFormDefault="qualified">
+	<xsd:import namespace="http://xml.datev.de/DD/DE/bedi/tps/ledger/v060" schemaLocation="Belegverwaltung_online_ledger_types_v060.xsd"/>
+	<xsd:element name="LedgerImport">
+		<xsd:annotation>
+			<xsd:documentation>strukturierte Belegsatzdaten</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="consolidate">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element name="accountsPayableLedger" type="accountsPayableLedger" maxOccurs="5000"/>
+							<xsd:element name="cashLedger" type="cashLedger" maxOccurs="5000"/>
+							<xsd:element name="accountsReceivableLedger" type="accountsReceivableLedger" maxOccurs="5000"/>
+						</xsd:choice>
+						<xsd:attribute name="consolidatedAmount" type="de:p10002" use="required">
+							<xsd:annotation>
+								<xsd:documentation>Das Attribut consolidatedAmount enthält immer den konsolidierten Betrag über alle Belegsätze. </xsd:documentation>
+								<xsd:documentation>Der konsolidierte Betrag muss mit den Beträgen der einzelnen Belegsätze übereinstimmen. Bei Abweichungen wird der Import abgelehnt.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+						<xsd:attribute name="consolidatedDate" type="de:p10029" use="required">
+							<xsd:annotation>
+								<xsd:documentation>Das Attribut consolidatedDate enthält immer das konsolidierte Datum über alle Belegsätze. </xsd:documentation>
+								<xsd:documentation>Das konsolidierte Datum muss im Wirtschaftsjahr und in dem in der Dokumentenverwaltungsdatei document.xml angegebenen Zeitraum liegen. Das konsolidierte Datum muss mit dem Datum der einzelnen Belegsätze übereinstimmen. Bei Abweichungen wird der Import abgelehnt.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+						<xsd:attribute name="consolidatedInvoiceId" type="de:p10040" use="optional">
+							<xsd:annotation>
+								<xsd:documentation>Das Attribut consolidatedInvoiceId enthält die konsolidierte Rechnungsnummer über alle Belegsätze. </xsd:documentation>
+								<xsd:documentation>Die konsolidierte Rechnungsnummer muss mit den Rechnungsnummern der einzelnen Belegsätze übereinstimmen. Bei Abweichungen wird der Import abgelehnt.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+						<xsd:attribute name="consolidatedCurrencyCode" type="de:p1" use="required">
+							<xsd:annotation>
+								<xsd:documentation>Das Attribut consolidatedCurrencyCode enthält immer die konsolidierte Währung über alle Belegsätze. </xsd:documentation>
+								<xsd:documentation>Die konsolidierte Währung muss mit den Währungen der einzelnen Belegsätze übereinstimmen. Bei Abweichungen wird der Import abgelehnt.
+Ausnahme: Aktuell ist im Kassenbuch online nur EUR zulässig
+</xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+						<xsd:attribute name="consolidatedDeliveryDate" type="de:p10029" use="optional">
+							<xsd:annotation>
+								<xsd:documentation>Das Attribut consolidatedDeliveryDate enthält immer das konsolidierte Liefer-/Leistungsdatum über alle Belegsätze. </xsd:documentation>
+								<xsd:documentation>Das konsolidierte Liefer-/Leistungsdatum muss mit dem Liefer-/Leistungsdatum der einzelnen Belegsätze übereinstimmen. Bei Abweichungen wird der Import abgelehnt. Das Liefer-/Leistungsdatum muss kleiner/gleich dem Rechnungsdatum sein. Ein Liefer-/Leistungsdatum größer dem Rechnungsdatum wird ignoriert, der Import findet trotzdem statt.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+						<xsd:attribute name="consolidatedOrderId" type="de:p13" use="optional">
+							<xsd:annotation>
+								<xsd:documentation>Das Attribut consolidatedOrderId enthält die konsolidierte Auftragsnummer über alle Belegsätze. </xsd:documentation>
+								<xsd:documentation>Die konsolidierte Auftragsnummer muss mit den Auftragsnummern der einzelnen Belegsätze übereinstimmen. Bei Abweichungen wird der Import abgelehnt.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="version" type="de:p3" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Das Attribut version enthält immer die aktuelle Versionsnummer: hier 6.0.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="generator_info" type="de:p10009" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Das Attribut generator_info enthält den Namen des Unternehmens, das die elektronischen Daten erstellt hat. Dieser Wert wird in der Rechnungseingangs-/ Rechnungsausgangsliste als Absenderinformation angezeigt.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="generating_system" type="de:p10009">
+				<xsd:annotation>
+					<xsd:documentation>Das Attribut generator_system enthält den Namen des Systems, das die elektronischen Daten erstellt hat. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="xml_data" type="de:p36" use="required" fixed="Kopie nur zur Verbuchung berechtigt nicht zum Vorsteuerabzug">
+				<xsd:annotation>
+					<xsd:documentation>Das Attribut xml_data enthält den fixen Hinweis Kopie nur zur Verbuchung berechtigt nicht zum Vorsteuerabzug.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="base">
+		<xsd:sequence>
+			<xsd:element name="date" type="de:p10029" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element date enthält das Belegdatum. </xsd:documentation>
+					<xsd:documentation>Das Datum muss im Wirtschaftsjahr und in dem in der Dokumentenverwaltungsdatei document.xml angegebenen Zeitraum liegen. Dieses Datum wird bei der Erzeugung des Belegsatzes in das Feld Datum eingetragen und in das entsprechende Feld in der Übersicht der Belegablage übernommen. 
+
+Eine Übernahme der Belegdaten für Erfassungsperioden, die nicht einem kalendarischen Anfang bzw. Ende eines Erfassungsmonats zum Wirtschaftsjahresbeginn/-ende entsprechen, ist nicht möglich.
+
+Beispiel Periode April
+WJ-Beginn/-Ende	
+
+Erfassungsperiode	
+
+Belegdaten
+15.04.2018 – 14.04.2019	01.04.2018 – 14.04.2018	Fehlerhafte Verarbeitung 
+14.04.2018 – 13.04.2019	14.04.2018 – 30.04.2018	Fehlerhafte Verarbeitung 
+01.04.2018 – 31.03.2019	01.04.2018 – 30.04.2018	Korrekte Verarbeitung 
+Das Datum wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Datum ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="amount" type="de:p7" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element amount enthält den Betrag. </xsd:documentation>
+					<xsd:documentation>Ein Betrag 0.00 ist nicht zulässig. Dieser Betrag wird bei der Erzeugung des Belegsatzes in das Feld Betrag eingetragen. 
+Ist der Rechnungsbetrag positiv, wird als Belegart Rechnung gesetzt. Ist der Rechnungsbetrag negativ, wird als Belegart Rechnungskorrektur gesetzt.
+Ist der Kassen-Betrag positiv, wird als Belegart Einnahme gesetzt. Ist der Kassen-Betrag negativ, wird als Belegart Ausgabe gesetzt.
+Der Betrag wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Umsatz mit Soll/Haben-Kennung ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="discountAmount" type="de:p34" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element discountAmount enthält den Skontobetrag. </xsd:documentation>
+					<xsd:documentation>Der Skontobetrag wird bei der Erzeugung des Belegsatzes in das Feld Skontobetrag eingetragen. Dieses Feld darf nur in Verbindung mit einem Personenkonto verwendet werden, ansonsten wird der Skontobetrag im DATEV-Rechnungswesen-Programm abgelehnt. Im Kassenbuch online wird diese Prüfung nicht durchgeführt. Der Skontobetrag muss kleiner als der Betrag sein.
+Der Skontobetrag wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Skonto ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="accountNo" type="de:p10039" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element accountNo enthält die Kontonummer des Gegenkontos. </xsd:documentation>
+					<xsd:documentation>Diese Kontonummer wird bei der Erzeugung des Belegsatzes in das Feld Gegenkonto eingetragen. Es können sowohl Sach- als auch Personenkonten angegeben werden. Die Länge der Gegenkontonummer muss auf die in den Stammdaten online gewählten Sachkontennummernlänge abgestimmt sein.
+Beispiel: Sachkontennummernlänge = 4 in Stammdaten online
+Kontonummer	Kontenkreis	Verarbeitung
+4000	Sachkonto	Ja
+10000	Personenkonto Debitor	Ja
+70000	Personenkonto Kreditor	Ja
+123456	Fehler	Nein
+
+Beispiel: Sachkontennummernlänge = 6 in Stammdaten online
+Kontonummer	Kontenkreis	Verarbeitung
+4000	Sachkonto	Ja
+40000	Sachkonto	Ja
+400000	Sachkonto	Ja
+1000000	Personenkonto Debitor	Ja
+7000000	Personenkonto Kreditor	Ja
+12345678	Fehler	Nein
+
+Die Kontonummer wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld BU Gegenkonto bzw. Gegenkonto ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="buCode" type="de:p10033" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element buCode enthält den Buchungsschlüssel (BU-Schlüssel). </xsd:documentation>
+					<xsd:documentation>Der BU-Schlüssel definiert berichtigungs- bzw. umsatzsteuerrelevante Tatbestände. Es können nur die in der Programmhilfe des Kassenbuchs online bzw. Belege online genannten zulässigen BU-Schlüssel verwendet werden. Der BU-Schlüssel wird bei der Erzeugung des Belegsatzes in das Feld BU eingetragen.
+Der BU-Schlüssel wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld BU Gegenkonto bzw. BU ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="costAmount" type="de:p37" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element costAmount enthält die KOST-Menge. </xsd:documentation>
+					<xsd:documentation>Die KOST-Menge wird bei der Erzeugung des Belegsatzes in das Feld KOST-Menge eingetragen.
+Die KOST-Menge wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld KOST-Menge ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="costCategoryId" type="de:p10041" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element costCategoryId enthält die Kostenstelle. </xsd:documentation>
+					<xsd:documentation>Die Kostenstelle wird bei der Erzeugung des Belegsatzes in das Feld KOST1 eingetragen. Sie spezifiziert im DATEV-Rechnungswesen-Programm die Kostenstelle zur Erstellung eines Betriebsabrechnungsbogens.
+Die Kostenstelle wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld KOST1 ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="costCategoryId2" type="de:p10041" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element costCategoryId2 enthält die Kostenstelle 2. </xsd:documentation>
+					<xsd:documentation>Die Kostenstelle 2 wird bei der Erzeugung des Belegsatzes in das Feld KOST2 eingetragen. Sie spezifiziert im DATEV-Rechnungswesen-Programm die Kostenstelle 2 zur Erstellung eines Betriebsabrechnungsbogens.
+Die Kostenstelle 2 wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld KOST2 ausgewiesen.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="tax" type="de:p33" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element tax enthält den Steuersatz. </xsd:documentation>
+					<xsd:documentation>Der Steuersatz wird bei der Erzeugung des Belegsatzes in das Feld Steuer % eingetragen. Er spezifiziert im DATEV-Rechnungswesen-Programm die Information für einen entsprechenden Steuerschlüssel und wird hier als Zusatzangabe verwendet.
+Der Steuersatz wird im DATEV-Rechnungswesen-Programm nicht in der Erfassungszeile ausgewiesen. Die Information ist unter Zusatzinformation bearbeiten gespeichert.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="information" type="de:p30" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Das Element information enthält eine Nachricht. </xsd:documentation>
+					<xsd:documentation>Die Nachricht wird bei der Erzeugung des Belegsatzes in das Feld Nachricht eingetragen. Sie ist im DATEV-Rechnungswesen-Programm neben der Bildanzeige zu finden und liefert dem steuerlichen Berater weitere Informationen zum Sachverhalt.
+Die Nachricht wird im DATEV-Rechnungswesen-Programm nicht in der Erfassungszeile ausgewiesen. Die Information ist unter Zusatzinformation bearbeiten gespeichert.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="base1">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="base">
+				<xsd:sequence>
+					<xsd:element name="currencyCode" type="de:p1" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element currencyCode enthält den Währungscode. </xsd:documentation>
+							<xsd:documentation>Dieser Währungscode wird bei der Erzeugung des Belegsatzes in das Feld WKZ eingetragen.
+Ausnahme: Aktuell ist im Kassen¬buch online nur EUR zulässig
+Der Währungscode wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld WKZ ausgewiesen. 
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="invoiceId" type="de:p10040" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element invoiceId enthält die Rechnungsnummer. </xsd:documentation>
+							<xsd:documentation>Die Rechnungsnummer wird bei der Erzeugung des Belegsatzes in das Feld Re.-Nr. in Belege online eingetragen.
+Die Rechnungsnummer wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Belegfeld 1 ausgewiesen.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="bookingText" type="de:p10036" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element bookingText enthält den Belegtext. </xsd:documentation>
+							<xsd:documentation>Der Belegtext wird bei der Erzeugung des Belegsatzes in das Feld Belegtext eingetragen, steuert im DATEV-Rechnungswesen-Programm die Verknüpfung zur Lerndatei und vervollständigt damit unvollständige Belegsätze.
+Der Belegtext wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Buchungstext ausgewiesen.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="typeOfReceivable" type="de:p10001" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element typeOfReceivable enthält die Forderungsart.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ownVatId" type="de:p10027" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element ownVatId enthält die eigene Umsatzsteuer-ID. </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="shipFromCountry" type="de:p10014" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element shipFromCountry enthält das Ursprungsland im Rahmen des OSS-Verfahrens.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="partyId" type="de:p10011" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element partyId enthält die Kundennummer des Geschäftspartners. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Kunden-Nr. eingetragen.
+Die Nachricht wird im DATEV-Rechnungswesen-Programm nicht in der Erfassungszeile ausgewiesen. Die Information ist unter Zusatzinformation bearbeiten gespeichert.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="paidAt" type="de:p10029" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element paidAt enthält das Datum „Gezahlt am“. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Gezahlt am eingetragen.
+Das Datum „Gezahlt am“ wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="internalInvoiceId" type="de:p10" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element internalInvoiceId enthält die interne Rechnungsnummer. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Interne Re.-Nr. eingetragen.
+Die interne Rechnungsnummer wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="vatId" type="de:p10027" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element vatId enthält die Umsatzsteuer-Identifikationsnummer des Geschäftspartners. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld USt-IdNr. Lieferant für accountsPayableLedger (Rechnungseingangsimport) bzw. USt-IdNr. Kunde für accountsReceivableLedger (Rechnungsausgangsimport) eingetragen. Die Umsatzsteuer-Identifikationsnummer ist eine von den einzelnen EU-Mitgliedstaaten individuell gestaltbare Identifikationsnummer eines Unternehmens.
+
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="shipToCountry" type="de:p10014" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element shipToCountry enthält das Bestimmungsland im Rahmen des OSS-Verfahrens.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="exchangeRate" type="de:p31" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element exchangeRate enthält den Umrechnungskurs. </xsd:documentation>
+							<xsd:documentation>Der Umrechnungskurs wird im Belegsatz in das Feld Kurs eingetragen. Der Umrechnungskurs ist in Abhängigkeit von der Basiswährung in den DATEV Rechnungswesen-Programmen zu ermitteln. Beispiel: Basiswährung = EUR; Rechnungswährung = USD; der Umrechnungskurs entspricht dem Wert, dem ein Euro in der Fremdwährung wert ist, also dem Wechselkurs Euro zum Dollar (z. B. 1 EUR = 1,147900 USD) somit ist exchange_rate = 1.147900. Wird kein Wert angegeben, wird in den DATEV-Rechnungswesen-Programmen automatisch der Umrechnungskurs aus der Kurstabelle ermittelt. Die aktuellen Tageskurse stehen über das DATEV-Rechenzentrum zur Verfügung.
+Der Umrechnungskurs wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Kurs ausgewiesen.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="bankCode" type="de:p10007" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element bankCode enthält die Bankleitzahl. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld BLZ eingetragen. Wenn die Bankleitzahl angegeben wird, muss auch die Kontonummer angegeben werden. Fehlt die Länderkennung der Bankverbindung oder ist sie DE, muss die Bankleitzahl zwingend 8 Ziffern enthalten.
+Die Bankleitzahl wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="bankAccount" type="de:p10005" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element bankAccount enthält die Bankkonto-Nummer. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Bankkonto eingetragen. Wenn die Kontonummer angegeben wird, muss auch die Bankleitzahl angegeben werden. Fehlt die Länderkennung der Bankverbindung oder ist sie DE, muss die Konto¬nummer mit maximal 10 Ziffern sein.
+Die Bankkonto-Nummer wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="bankCountry" type="de:p10014" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element bankCountry enthält die Länderkennung der Bank. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Länderkennzeichen eingetragen.
+Die Länderkennung der Bank wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="iban" type="de:p10010" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element iban enthält die IBAN. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld IBAN eingetragen.
+Die IBAN wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swiftCode" type="de:p10030" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element swiftCode enthält die SWIFT/BIC-Code. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld BIC eingetragen.
+Der BIC-Code wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="accountName" type="de:p10009" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element accountName enthält die Kontobezeichnung für das Konto (Element accountNo). </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Kontobezeichnung eingetragen.
+Die Kontobezeichnung wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="paymentConditionsId" type="de:p23" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Attribut paymentConditionsId enthält die Zahlungsbedingungsnummer. </xsd:documentation>
+							<xsd:documentation>Beachten Sie, dass diese Zahlungsbedingungsnummer in den Stammdaten online angelegt sein muss. Auf Basis der in den Stammdaten online angelegten Zahlungsbedingungsnummer werden in das Feld Zahlungsbedingung die Bezeichnung aus den Stammdaten online eingetragen und der Belegsatz um die Skontoinformationen wie z. B. das Feld Fällig (o. Skto.) ergänzt.
+
+Ausnahme: Zahlungsbedingungsnummer 9 (Mahn-/Zahlsperre) muss nicht angelegt sein. 
+
+Wenn eine Zahlungsbedingungsnummer angegeben ist, dürfen keine Skonto-Informationen angegeben sein. Sind sowohl Zahlungsbedingungsnummer als auch Skontoinformationen angegeben, werden die Belegsatzdaten im Rechnungsbuch nicht verarbeitet.
+
+Zu den Skontoinformationen gehören folgende Elemente:
+– discountAmount
+– discountPercentage
+– discountPaymentDate
+– discountAmount2
+– discountPercentage2
+– discountPaymentDate2
+– dueDate
+
+Die Zahlungsbedingungsnummer wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben. Ausnahme: Die Zahlungsbedingungsnummer 9 wird an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="paymentOrder" type="de:p35" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>payment order kennzeichnet, ob in Belege Online der Haken "Lastschrift erstellen" bzw. "Überweisung erstellen" gesetzt wird</xsd:documentation>
+							<xsd:documentation>Achtung: der Wert "true" ist in Kombination mit paymentConditionsId="9"(Mahn-/Zahlsperre) nicht zulässig</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="discountPercentage" type="de:p33" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element discountPercentage enthält den Prozentsatz des Skontos (Element discountAmount), der abgezogen werden darf. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Skonto 1 in % eingetragen. Wenn ein Prozentsatz (Skonto 1) angegeben wird, muss auch das Fälligkeitsdatum und der Betrag für Skonto 1 angegeben werden. Der Prozentsatz für Skonto 1 muss größer als der Prozentsatz für Skonto 2 sein. Es sind nur positive Angaben zulässig.
+Beachten Sie die Abhängigkeit zu der Zahlungsbedingung (Element paymentConditionsId).
+Der Prozentsatz des Skontos wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="discountPaymentDate" type="de:p10029" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element discountPaymentDate enthält das Fälligkeitsdatum, bis zu dem der Skonto 1 abgezogen werden darf (Element discountAmount). </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Fällig (m. Skto. 1) eingetragen. 
+Wenn ein Fälligkeitsdatum für Skonto 1 angegeben wird, muss auch der Prozent¬satz und der Betrag für Skonto 1 angegeben werden. Das Fälligkeitsdatum für Skonto 1 liegt vor dem Fälligkeitsdatum und dem Fälligkeitsdatum für Skonto 2 und nach dem Rechnungsdatum.
+Bachten Sie die Abhängigkeit zu der Zahlungsbedingung (Element paymentConditionsId).
+Das Skonto 1-Fälligkeitsdatum wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="discountAmount2" type="de:p34" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element discountAmount2 enthält den Skontobetrag2. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Skontobetrag 2 eingetragen. Die Angaben werden nicht an das DATEV-Rechnungswesen-Programm weitergegeben. 
+Der Skontobetrag 2 muss kleiner als der Betrag und kleiner als der Skontobetrag 1 sein. Wenn ein Skontobetrag angegeben wird, dann muss auch ein Fälligkeits¬datum (Skonto 2) und ein Prozentsatz für Skonto 2 angegeben werden. Die Summe der beiden Skontobeträge muss kleiner sein als der Betrag. Es sind nur positive Angaben zulässig.
+Beachten Sie die Abhängigkeit zu der Zahlungsbedingung (Element paymentConditionsId).
+Der Skontobetrag 2 wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="discountPercentage2" type="de:p33" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element discountPercentage2 enthält den Prozentsatz des Skontos 2, der abgezogen werden darf. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Skonto 2 in % eingetragen. 
+Wenn ein Prozentsatz (Skonto 2) angegeben wird, muss auch das Fälligkeitsda¬tum und der Betrag für Skonto 2 angegeben werden. Der Prozentsatz für Skonto 1 muss größer als der Prozentsatz für Skonto 2 sein. Es sind nur positive Angaben zulässig.
+Beachten Sie die Abhängigkeit zu der Zahlungsbedingung (Element paymentConditionsId).
+Der Prozentsatz des Skontos 2 wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="discountPaymentDate2" type="de:p10029" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element discountPaymentDate2 enthält das Fälligkeitsdatum, bis zu dem der Skonto 2 abgezogen werden darf. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Fällig (m. Skto. 2) eingetragen. 
+Wenn ein Fälligkeitsdatum für Skonto 2 angegeben wird, dann muss auch der Prozentsatz und der Betrag für Skonto 2 angegeben werden. Das Fälligkeitsdatum für Skonto 2 liegt vor dem Fälligkeitsdatum und nach dem Fälligkeitsdatum für Skonto 1 und dem Rechnungsdatum.
+Beachten Sie die Abhängigkeit zu der Zahlungsbedingung (Element paymentConditionsId).
+Das Skonto 2-Fälligkeitsdatum wird nicht an das DATEV-Rechnungswesen-Programm weitergegeben.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="dueDate" type="de:p10029" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element dueDate enthält das Fälligkeitsdatum der Rechnung. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Fällig (o. Skto.) eingetragen. Das Fälligkeitsdatum liegt nach dem Rechnungsdatum und den Fälligkeitsdaten für Skonto 1 und Skonto 2.
+Beachten Sie die Abhängigkeit zu der Zahlungsbedingung (Element paymentConditionsId).
+Das Fälligkeitsdatum der Rechnung wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Belegfeld 2 ausgewiesen.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="bpAccountNo" type="de:p11" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element bpAccountNo enthält die Kontonummer des Geschäftspartners. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Lieferantenkonto für accountsPayableLedger (Rechnungseingangsimport) bzw. Kundenkonto für accountsReceivableLedger (Rechnungsausgangsimport) eingetragen. Es können nur Personenkonten angegeben werden. Das Gegenkonto muss der in den Stammdaten online gewählten Sachkontennummernlänge fachlich entsprechen.
+Das angegebene Personenkonto muss zu dem vorliegenden Geschäftsvorfall passen:
+– Rechnungseingang: Kreditoren-Kontonummer beim Rechnungsempfänger (70000 – 999999999) 
+– Rechnungsausgang: Debitoren-Kontonummer beim Rechnungsaussteller (10000 – 699999999) 
+Bei der Verarbeitung in DATEV Unternehmen online erfolgt keine Prüfung dieser Angaben.
+Beispiel: gewählte Sachkontennummernlänge = 4
+Kontonummer	Kontenkreis	Verarbeitung
+4000	Sachkonto	Nein
+10000	Personenkonto Debitor	Ja
+70000	Personenkonto Kreditor	Ja
+123456	Fehler	Nein
+
+Beispiel: gewählte Sachkontennummernlänge = 6
+Kontonummer	Kontenkreis	Verarbeitung
+4000	Sachkonto	Nein
+40000	Sachkonto	Nein
+400000	Sachkonto	Nein
+1000000	Personenkonto Debitor	Ja
+7000000	Personenkonto Kreditor	Ja
+12345678	Fehler	Nein
+
+Der Kontonummer des Geschäftspartners wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Konto ausgewiesen.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="deliveryDate" type="de:p10029" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element deliveryDate enthält das Liefer-/Leistungsdatum der Rechnung. </xsd:documentation>
+							<xsd:documentation>Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Leistungsdatum eingetragen. Das Liefer-/Leistungsdatum kann kleiner/gleich dem Rechnungsdatum sein. Ein Liefer-/Leistungsdatum größer dem Rechnungsdatum wird ignoriert, der Import findet trotzdem statt.
+Das Liefer-/Leistungsdatum der Rechnung wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Leistungsdatum ausgewiesen, wenn das Feld aktiviert ist. Das Liefer-/Leistungsdatum wird erst ab der Version 8.0 in das DATEV-Rechnungswesen-Programm übernommen.
+Beachten Sie, dass im DATEV-Rechnungswesen-Programm zusätzliche Prüfungen stattfinden.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="orderId" type="de:p13" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element orderId enthält die Auftragsnummer. </xsd:documentation>
+							<xsd:documentation>Die Auftragsnummer wird bei der Erzeugung des Belegsatzes nicht angezeigt.
+Die Rechnungsnummer wird im DATEV-Rechnungswesen-Programm in der Erfassungszeile im Feld Auftrags-Nr. in Verbindung mit dem Feld AnzBuTyp ausgewiesen, wenn das Feld aktiviert ist. Die Auftragsnummer wird nur von Ausgangsrechnungen und erst ab der Version 8.0 in das DATEV-Rechnungswesen-Programm übernommen.
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="cashLedger">
+		<xsd:annotation>
+			<xsd:documentation>strukturierte Belegdaten für das Kassenbuch</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="base">
+				<xsd:sequence>
+					<xsd:element name="currencyCode" type="de:p1" fixed="EUR" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element currencyCode enthält den Währungscode. </xsd:documentation>
+							<xsd:documentation>Dieser Währungscode wird bei der Erzeugung des Belegsatzes in das Feld WKZ eingetragen.
+Aktuell ist im Kassen¬buch online nur EUR zulässig
+</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="invoiceId" type="de:p10040" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element invoiceId enthält die Rechnungsnummer. </xsd:documentation>
+							<xsd:documentation>Die Rechnungsnummer wird bei der Erzeugung des Belegsatzes in das Feld Re.-Nr. in das Kassenbuch online eingetragen.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="bookingText" type="de:p10036" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element bookingText enthält den Belegtext. </xsd:documentation>
+							<xsd:documentation>Der Belegtext wird bei der Erzeugung des Belegsatzes in das Feld Belegtext eingetragen, steuert im DATEV-Rechnungswesen-Programm die Verknüpfung zur Lerndatei und vervollständigt damit unvollständige Belegsätze. Der Belegtext ist für zukünftige Erweiterungen bereits auf 60 Stellen erhöht worden. Aktuell werden bei der Verarbeitung in DATEV Unternehmen online nur die ersten 30 Stellen verwendet, der Rest wird abgeschnitten.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="accountsPayableLedger">
+		<xsd:annotation>
+			<xsd:documentation>strukturierte Belegdaten für das Rechnungseingangsbuch </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="base1">
+				<xsd:sequence>
+					<xsd:element name="supplierName" type="de:p10012" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element supplierName enthält den Lieferantennamen</xsd:documentation>
+							<xsd:documentation>Es existiert nur für accountsPayableLedger (Rechnungseingangsimport). Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Lieferantenname eingetragen.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="supplierCity" type="de:p10019" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element supplierCity enthält den Lieferantenort </xsd:documentation>
+							<xsd:documentation>Es existiert nur für accountsPayableLedger (Rechnungseingangsimport). Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Lieferantenort eingetragen.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="accountsReceivableLedger">
+		<xsd:annotation>
+			<xsd:documentation>sturkturierte Belegdaten für das Rechnungsausgangsbuch</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="base1">
+				<xsd:sequence>
+					<xsd:element name="customerName" type="de:p10012" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element customerName enthält den Kundennamen </xsd:documentation>
+							<xsd:documentation>Es existiert nur für accountsReceivableLedger (Rechnungsausgangsimport). Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Kundenname eingetragen.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="customerCity" type="de:p10019" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element customerCity enthält den Kundenort </xsd:documentation>
+							<xsd:documentation>Es existiert nur für accountsReceivableLedger (Rechnungsausgangsimport). Dieser Wert wird bei der Erzeugung des Belegsatzes in das Feld Kundenort eingetragen.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

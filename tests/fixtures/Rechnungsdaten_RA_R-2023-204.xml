@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<LedgerImport xmlns="http://xml.datev.de/bedi/tps/ledger/v060" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.datev.de/bedi/tps/ledger/v060 Belegverwaltung_online_ledger_import_v060.xsd" version="6.0" generator_info="ameax" generating_system="ameax\datev" xml_data="Kopie nur zur Verbuchung berechtigt nicht zum Vorsteuerabzug">
+ <consolidate consolidatedAmount="2587.00" consolidatedDate="2023-02-05" consolidatedInvoiceId="R-2023-204" consolidatedCurrencyCode="EUR">
+  <accountsReceivableLedger>
+   <date>2023-02-05</date>
+   <amount>1190.00</amount>
+   <accountNo>8400</accountNo>
+   <costCategoryId>10</costCategoryId>
+   <costCategoryId2>20</costCategoryId2>
+   <tax>19.00</tax>
+   <information>Ausgangsrechnung, drei Steuersätze und Kontierung</information>
+   <currencyCode>EUR</currencyCode>
+   <invoiceId>R-2023-204</invoiceId>
+   <bookingText>Produkt &quot;ABC&quot;,Art-Nr. Art123</bookingText>
+   <shipFromCountry>DE</shipFromCountry>
+   <partyId>K999</partyId>
+   <vatId>DE999456789</vatId>
+   <iban>DE33762500000121540061</iban>
+   <dueDate>2023-02-19</dueDate>
+   <bpAccountNo>10100</bpAccountNo>
+   <orderId>5KK77592Y773816</orderId>
+   <customerName>Musterkunde</customerName>
+   <customerCity>Musterort</customerCity>
+  </accountsReceivableLedger>
+  <accountsReceivableLedger>
+   <date>2023-02-05</date>
+   <amount>1190.00</amount>
+   <accountNo>8400</accountNo>
+   <costCategoryId>10</costCategoryId>
+   <costCategoryId2>20</costCategoryId2>
+   <tax>19.00</tax>
+   <information>Ausgangsrechnung, drei Steuersätze und Kontierung</information>
+   <currencyCode>EUR</currencyCode>
+   <invoiceId>R-2023-204</invoiceId>
+   <bookingText>Produkt B, Art-Nr. Art456</bookingText>
+   <shipFromCountry>DE</shipFromCountry>
+   <partyId>K999</partyId>
+   <vatId>DE999456789</vatId>
+   <iban>DE33762500000121540061</iban>
+   <dueDate>2023-02-19</dueDate>
+   <bpAccountNo>10100</bpAccountNo>
+   <orderId>5KK77592Y773816</orderId>
+   <customerName>Musterkunde</customerName>
+   <customerCity>Musterort</customerCity>
+  </accountsReceivableLedger>
+  <accountsReceivableLedger>
+   <date>2023-02-05</date>
+   <amount>107.00</amount>
+   <accountNo>8300</accountNo>
+   <costCategoryId>10</costCategoryId>
+   <costCategoryId2>20</costCategoryId2>
+   <tax>19.00</tax>
+   <information>Ausgangsrechnung, drei Steuersätze und Kontierung</information>
+   <currencyCode>EUR</currencyCode>
+   <invoiceId>R-2023-204</invoiceId>
+   <bookingText>Produkt C, Art-Nr. Art789</bookingText>
+   <shipFromCountry>DE</shipFromCountry>
+   <partyId>K999</partyId>
+   <vatId>DE999456789</vatId>
+   <iban>DE33762500000121540061</iban>
+   <dueDate>2023-02-19</dueDate>
+   <bpAccountNo>10100</bpAccountNo>
+   <orderId>5KK77592Y773816</orderId>
+   <customerName>Musterkunde</customerName>
+   <customerCity>Musterort</customerCity>
+  </accountsReceivableLedger>
+  <accountsReceivableLedger>
+   <date>2023-02-05</date>
+   <amount>100.00</amount>
+   <accountNo>8100</accountNo>
+   <costCategoryId>10</costCategoryId>
+   <costCategoryId2>20</costCategoryId2>
+   <tax>0.00</tax>
+   <information>Ausgangsrechnung, drei Steuersätze und Kontierung</information>
+   <currencyCode>EUR</currencyCode>
+   <invoiceId>R-2023-204</invoiceId>
+   <bookingText>Produkt D, Art-Nr. ArtD</bookingText>
+   <shipFromCountry>DE</shipFromCountry>
+   <partyId>K999</partyId>
+   <vatId>DE999456789</vatId>
+   <iban>DE33762500000121540061</iban>
+   <dueDate>2023-02-19</dueDate>
+   <bpAccountNo>10100</bpAccountNo>
+   <orderId>5KK77592Y773816</orderId>
+   <customerName>Musterkunde</customerName>
+   <customerCity>Musterort</customerCity>
+  </accountsReceivableLedger>
+ </consolidate>
+</LedgerImport>

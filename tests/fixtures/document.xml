@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<archive xmlns="http://xml.datev.de/bedi/tps/document/v06.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.datev.de/bedi/tps/document/v06.0 Document_v060.xsd" version="6.0" generatingSystem="ameax Unternehmenssoftware">
+ <header>
+  <date>2023-06-16T08:30:06</date>
+ </header>
+ <content>
+  <document>
+   <extension xsi:type="accountsPayableLedger" datafile="Eingangsrechnung 123.xml">
+    <property key="1" value="2023-06"/>
+    <property key="3" value="Eingangsrechnungen"/>
+   </extension>
+   <extension xsi:type="File" name="test1.pdf"/>
+   <extension xsi:type="File" name="test2.pdf"/>
+   <repository>
+    <level id="1" name="ameax Unternehmensoftware"/>
+    <level id="2" name="Import 2023 RE"/>
+    <level id="3" name="06"/>
+   </repository>
+  </document>
+  <document>
+   <extension xsi:type="accountsReceivableLedger" datafile="Ausgangsrechnung 345.xml">
+    <property key="1" value="2023-06"/>
+    <property key="3" value="Ausgangsrechnungen"/>
+   </extension>
+   <repository>
+    <level id="1" name="test vendor"/>
+    <level id="2" name="Import 2023 RA"/>
+    <level id="3" name="06"/>
+   </repository>
+  </document>
+  <document>
+   <extension xsi:type="SEPAFile" name="sepa-12345.xml"/>
+   <repository>
+    <level id="1" name="ameax"/>
+    <level id="2" name="Import 2023 Sepa"/>
+    <level id="3" name="06"/>
+   </repository>
+  </document>
+  <document>
+   <extension xsi:type="File" name="Contract-999.pdf"/>
+   <repository>
+    <level id="1" name="ameax"/>
+    <level id="2" name="Import 2023 Dateien"/>
+    <level id="3" name="06"/>
+   </repository>
+  </document>
+ </content>
+</archive>

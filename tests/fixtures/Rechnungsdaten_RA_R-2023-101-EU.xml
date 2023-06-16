@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<LedgerImport xmlns="http://xml.datev.de/bedi/tps/ledger/v060" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.datev.de/bedi/tps/ledger/v060 Belegverwaltung_online_ledger_import_v060.xsd" version="6.0" generator_info="ameax" generating_system="ameax\datev" xml_data="Kopie nur zur Verbuchung berechtigt nicht zum Vorsteuerabzug">
+ <consolidate consolidatedAmount="1000.00" consolidatedDate="2023-01-12" consolidatedInvoiceId="R-2023-101-EU" consolidatedCurrencyCode="EUR">
+  <accountsReceivableLedger>
+   <date>2023-01-12</date>
+   <amount>1000.00</amount>
+   <accountNo>8200</accountNo>
+   <buCode>231</buCode>
+   <tax>0.00</tax>
+   <information>Ausgangsrechnung, steuerfreie innergemeinschaftliche Lieferung</information>
+   <currencyCode>EUR</currencyCode>
+   <invoiceId>R-2023-101-EU</invoiceId>
+   <bookingText>Produkt B, Art-Nr. Art456</bookingText>
+   <ownVatId>DE333456789</ownVatId>
+   <partyId>K999</partyId>
+   <vatId>FRXX999456789</vatId>
+   <dueDate>2023-01-26</dueDate>
+   <bpAccountNo>20100</bpAccountNo>
+   <customerName>MusterkundeEU</customerName>
+   <customerCity>MusterortEU</customerCity>
+  </accountsReceivableLedger>
+ </consolidate>
+</LedgerImport>

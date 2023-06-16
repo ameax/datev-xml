@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xml.datev.de/bedi/tps/document/v06.0" xmlns:de="http://xml.datev.de/DD/DE/bedi/tps/document/v060" targetNamespace="http://xml.datev.de/bedi/tps/document/v06.0" elementFormDefault="qualified">
+	<xsd:import namespace="http://xml.datev.de/DD/DE/bedi/tps/document/v060" schemaLocation="Document_types_v060.xsd"/>
+	<xsd:element name="archive" type="archive">
+		<xsd:annotation>
+			<xsd:documentation>Rootelement</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="archive">
+		<xsd:annotation>
+			<xsd:documentation>Das Root-Element archive enthält Informationen allgemeiner Art, die Metadaten zum DATEV Document-Package und den Inhaltsbereich, d. h., die Informationen, die den Inhalt des DATEV Document-Packages beschreiben.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="header" type="header" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Metadaten des ZIP-Archives</xsd:documentation>
+					<xsd:documentation>Im Header werden Metadaten zur Verarbeitung angegeben.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="content" type="content" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Beschreibung des Inhalts des ZIP-Archives</xsd:documentation>
+					<xsd:documentation>Das Element content klassifiziert den Inhaltsbereich. Es enthält zwingend das Element document, das mehrfach vorkommen kann.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="version" type="de:p16" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Versionsnummer der vorliegenden Spezifikation</xsd:documentation>
+				<xsd:documentation>Das Attribut version enthält die aktuelle Versionsnummer. Hier: 6.0.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="guid" type="de:p10037">
+			<xsd:annotation>
+				<xsd:documentation>GUID des ZIP-Archivs</xsd:documentation>
+				<xsd:documentation>Die GUID dient der eindeutigen Identifizierung des Dokuments und wird von dem abgebenden System erzeugt. Das Verfahren zur Erzeugung der GUID muss gewährleisten, dass die GUID eindeutig ist. Somit wird sichergestellt, dass nicht dieselbe GUID bei unterschiedlichen Dokumenten verwendet wird.
+Über die Dokumentenverwaltungsdatei kann dem Dokument bereits eine GUID zugeordnet werden, wenn eine extension File vorhanden ist.
+-	Ist diese noch nicht in Belege online vorhanden, wird das Dokument unter dieser GUID abgelegt.
+Ausnahme cashLedger: Die GUID wird nicht dem Dokument  zugeordnet, sondern der ersten Datei des Dokuments, die der extension File zugeordnet ist.
+-	Ist diese bereits in der Belegverwaltung online vorhanden, wird das betroffene Dokument überlesen und es werden die eventuell weiteren Dokumente des DATEV Document-Packages verarbeitet.
+Die GUID des Dokuments wird für die Zuordnung des Dokuments zu dem entsprechenden Buchungssatz in Kanzlei-Rechnungswesen verwendet.
+In der document.xml kann ein Dokument abgebildet werden, das aus mehreren einzelnen (physischen) Dateien besteht, d. h. mehrere extension-Elemente vom Typ File. Die Files werden dann zu einem Dokument geheftet.
+Weitere Informationen zum Aufbau der GUID finden Sie unter w3c.org.
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="generatingSystem" type="de:p10009" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Name des Softwareherstellers oder der Software, mit der die strukturierten Daten erzeugt wurden.</xsd:documentation>
+				<xsd:documentation>Das Attribut generatingSystem enthält den Namen des Software-Herstellers oder der Software, mit der das DATEV Document-Package erzeugt wurde. Es wird empfohlen, beides anzugeben, wenn die Länge des Felds nicht überschritten wird.
+Der Name dient keinem Auswertungszweck.
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="header">
+		<xsd:annotation>
+			<xsd:documentation>Der Header dient zur Verarbeitung von Metadaten.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="date" type="de:p10048" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Datum und Uhrzeit der Erstellung des Archivs</xsd:documentation>
+					<xsd:documentation>Das Element date enthält den Erstellungszeitpunkt der document.xml.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="de:p10051" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Beschreibung des Archivs</xsd:documentation>
+					<xsd:documentation>Das Element description enthält eine Beschreibung zum Inhalt der document.xml.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="consultantNumber" type="de:p10049" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Beraternummer</xsd:documentation>
+					<xsd:documentation>Das Element consultantNumber enthält die Berater-Nr. der zu übergebenden document.xml. Stimmt die Berater-Nr. in der document.xml nicht mit der Berater-Nr. des importierten ZIP-Files überein wird die Verarbeitung der Daten abgelehnt und kann im Import-Protokoll erneut ohne Prüfung auf Übereinstimmung gestartet werden.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="clientNumber" type="de:p10050" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Mandantennummer / Kundennummer</xsd:documentation>
+					<xsd:documentation>Das Element clientNumber enthält die Mandanten-Nr. der zu übergebenden document.xml. Stimmt die Mandanten-Nr. in der document.xml nicht mit der Mandanten-Nr. des importierten ZIP-Files überein wird die Verarbeitung der Daten abgelehnt und kann im Import-Protokoll erneut ohne Prüfung auf Übereinstimmung gestartet werden.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="clientName" type="de:p17" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Mandantenname / Kundenname</xsd:documentation>
+					<xsd:documentation>Das Element clientName enthält die Namen des Mandanten/der Firma der zu übergebenden document.xml. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="repository" type="repository" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Definition der Ablage-Struktur der Daten des ZIP-Archivs auf Metaebene</xsd:documentation>
+					<xsd:documentation>Die Ablagestruktur wird auf Metadatenebene durch das Element repository definiert. Sie ist für alle Dokumente in dem DATEV Document-Package gültig.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="content">
+		<xsd:annotation>
+			<xsd:documentation>Enthält die Inhaltsdaten des ZIP-Archivs und die Ablagestruktur.</xsd:documentation>
+			<xsd:documentation>Das Element content muss angegeben werden. Es strukturiert die Daten des DATEV Document-Packages. Es enthält zwingend das Element document das mehrfach vorkommen kann.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="document" type="document" minOccurs="1" maxOccurs="4999">
+				<xsd:annotation>
+					<xsd:documentation>Strukturierung der Daten des ZIP-Archivs</xsd:documentation>
+					<xsd:documentation>Das Element document muss angegeben werden. Es strukturiert die Daten des DATEV Document-Packages.
+Es enthält zwingend das Element extension. 
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="document">
+		<xsd:annotation>
+			<xsd:documentation>Ein document klammert zusammengehörige Dateien incl. Beschreibung.</xsd:documentation>
+			<xsd:documentation>Das Element document muss angegeben werden. Es strukturiert die Daten des DATEV Document-Packages.
+Es enthält zwingend das Element extension.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="description" type="de:p10052" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Beschreibung des Dokuments</xsd:documentation>
+					<xsd:documentation>Das Element description muss nicht angegeben werden. Es enthält eine individuelle Beschreibung.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="keywords" type="de:p10051" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Schlüsselwörter zum Dokument</xsd:documentation>
+					<xsd:documentation>Dem Dokument können weitere Schlüsselwörter (keywords) hinzugefügt werden. Diese Schlüsselwörter werden in Belege online am Dokument unter Notiz eingestellt.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="extension" type="extension" minOccurs="1" maxOccurs="50">
+				<xsd:annotation>
+					<xsd:documentation>Das Element extension definiert weitere Ausprägungen der Daten.</xsd:documentation>
+					<xsd:documentation>Extension = invoice:
+Bei der Ausprägung „invoice“ müssen neben dem Namen der Datei der Rechnungsdaten noch die Eigenschaften Eingangsrechnung (invoiceType = Incoming) oder Ausgangsrechnung (invoiceType = Outgoing) zugeordnet werden.
+Über die Ausprägung invoice werden dem Dokument Rechnungsinformationen zugeordnet. Beachten Sie, dass keine processID = 1 verwendet werden kann. Wird den Rechnungsinformationen kein Beleg zugeordnet, wird aus den strukturierten Rechnungsdaten eine Belegkopie durch erstellt und mit den Belegsätzen in Belege online verknüpft. Eine GUID kann dieser Belegkopie nicht über die Dokumentenverwaltungsdatei zugeordnet werden. 
+Extension = cashLedger:
+Bei der Ausprägung „cashLedger“ müssen neben dem Namen der Datei der Kassendaten noch die Eigenschaften Buchungszeitraum und Kassenkontonummer oder Kassenname zugeordnet werden.
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="repository" type="repository" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Definition der Ablage-Struktur der Daten des ZIP-Archivs auf Dokumentenebene</xsd:documentation>
+					<xsd:documentation>Das Element repository definiert die Ablagestruktur. Das Dokument wird in Belege online in der gewählten Struktur abgelegt.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentintern" type="documentintern" minOccurs="0" maxOccurs="1">
+       			 <xsd:annotation>
+          			<xsd:documentation>interene Informationen zu den Dokumenten</xsd:documentation>
+        		</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="guid" type="de:p10037" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>GUID des Beleges z. B. aus einem Dokumentenmanagementsystem </xsd:documentation>
+				<xsd:documentation>Die GUID dient der eindeutigen Identifizierung des Dokuments und wird von dem abgebenden System erzeugt. Das Verfahren zur Erzeugung der GUID muss gewährleisten, dass die GUID eindeutig ist. Somit wird sichergestellt, dass nicht dieselbe GUID bei unterschiedlichen Dokumenten verwendet wird.
+Die GUID des Dokuments wird für die Zuordnung des Dokuments zu dem entsprechenden Buchungssatz in Kanzlei-Rechnungswesen verwendet.
+In der document.xml kann ein Dokument abgebildet werden, das aus mehreren einzelnen (physischen) Dateien besteht, d. h. mehrere extension-Elemente vom Typ File. Die Files werden dann zu einem Dokument geheftet.
+Weitere Informationen zum Aufbau der GUID finden Sie unter w3c.org.
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="type" type="de:p25">
+			<xsd:annotation>
+				<xsd:documentation>Definition, um was für einen Typ es sich bei diesem Dokument handelt:  Eingangs-, Ausgangsrechnung oder weder noch.</xsd:documentation>
+				<xsd:documentation>Das Attribut type muss nicht angegeben werden. Der Dokumenttyp charakterisiert die Art des Dokuments. Es gibt an, ob das Dokument dem Rechnungseingang (Wert =1) oder dem Rechnungsausgang (Wert 2) zugeordnet werden soll. In Belege online wird einem Belegtyp die entsprechende Belegkreis-Eigenschaft zugeordnet. Wird der Dokumenttype nicht spezifiziert, wird dem Dokument die Kennung „ohne Belegtyp“ zugeordnet.
+Werden auch 
+-	Strukturierte Rechnungsinformationen (Ausprägung extension = invoice)
+-	Belegsatzdaten für Eingangsrechnungen (Ausprägung extension = accountsPayableLedger)
+-	Belegsatzdaten für Ausgangsrechnungen (Ausprägung extension = accountsReceivableLedger)
+mitgeliefert, müssen die Angaben im Feld type übereinstimmen mit den gelieferten extension-Inhalten.
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="processID" type="de:p26">
+			<xsd:annotation>
+				<xsd:documentation>Enthält Informationen zur Verarbeitung des Dokuments.</xsd:documentation>
+				<xsd:documentation>Das Attribut processID steuert die Weiterverarbeitung der Dokumente. 
+Enthält das Attribut den Wert 1 (= Buchungsrelevant), werden die Dokumente im Posteingang abgelegt.  Bei der Verarbeitung von strukturierten Daten (extension = invoice, cashLedger, accountsPayableLedger oder accountsReceivableLedger) ist eine Ablage im Posteingang nicht zulässig.
+ Enthält das Attribut den Wert 2 (=Archivierungsrelevant), werden die Belege im Ordner abgelegt und festgeschrieben.
+Buchungsrelevant
+Wenn ein Dokument als Buchungsrelevant charakterisiert wird, erfolgt die Ablage im Posteingang in Belege online, auch wenn eine Ablagestruktur definiert ist. Ist der Buchungsassistent in Belege online aktiviert und wird das Dateiformat vom Buchungsassistenten unterstützt, werden für den Beleg Rechnungsdaten vorgeschlagen.
+Diese Dokumente stehen anschließend für den Erfassungs- bzw. Buchungsprozess zur Verfügung. Werden Buchungsinformationen über einen weiteren Weg ausgetauscht, kann dies zu einer doppelten Buchung des Belegs führen.
+Archivierungsrelevant
+Wird ein Dokument als Archivierungsrelevant charakterisiert, erfolgt die Ablage in einem Ordner entweder automatisch durch die Verarbeitung von strukturierten Informationen (extension = invoice, cashLedger, accountsPayableLedger oder accountsReceivableLedger) oder durch entsprechende Angabe des Ablageorts repository in Belege online. Ist ein Beleg festgeschrieben, kann er in DATEV Unternehmen online nicht mehr weiterverarbeitet werden (Buchen, Zahlen).
+
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="documentintern">
+    <xsd:annotation>
+      <xsd:documentation>Ein document liefert zusätzliche Informationen zu einem document aus document.xml.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="property">
+        <xsd:annotation>
+          <xsd:documentation>Das Element „property“ enthält die Attribute zur Beschreibung des Extensiontyps "Invoice".</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:attribute name="value" type="de:p20" use="required">
+            <xsd:annotation>
+              <xsd:documentation>Das Attribut „value“ enthält immer den Wert zur erweiterten Beschreibung (key).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:attribute>
+          <xsd:attribute name="key" type="de:p20" use="required">
+            <xsd:annotation>
+              <xsd:documentation>Das Attribut „key“ enthält immer die erweiterte Beschreibung der vorliegenden Extension</xsd:documentation>
+            </xsd:annotation>
+          </xsd:attribute>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="repository">
+		<xsd:annotation>
+			<xsd:documentation>Das Element „repository“ enthält die Ablagestruktur der Daten des ZIP-Archivs.</xsd:documentation>
+			<xsd:documentation>In Belege online wird das Dokument unter Belege | Ordner abgelegt. Es kann dann die Kategorie, der Ordner und das Register ausgewählt werden. Die Ebenen müssen in der document.xml in der korrekten Reihenfolge angegeben werden.
+Existiert die angegebene Kategorie, der Ordner und/oder das Register noch nicht, werden diese automatisch durch das Programm angelegt.
+Tabelle der Standardablage: 
+Ausprägung	Kategorie	Ordner	Register
+invoice	Buchführung	IMPORT JJJJ	MM Monatsname
+cashLedger	Buchführung	IMPORT JJJJ Kasse	MM Monatsname
+accountsPayableLedger	Buchführung	IMPORT JJJJ RE 	MM Monatsname
+accountsReceivableLedger	Buchführung 	IMPORT JJJJ RA 	MM Monatsname
+
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="level" type="level" minOccurs="1" maxOccurs="3">
+				<xsd:annotation>
+					<xsd:documentation>Strukturiert die Hierarchieebenen der Ablagestruktur.</xsd:documentation>
+					<xsd:documentation>Definition für Level-id und -Name:
+id = 1 entspricht der Kategorie, name = der entsprechende Begriff z. B. „Buchführung“
+id = 2 entspricht dem Ordner, name = der entsprechende Begriff z. B. „FIBU“
+id = 3 entspricht dem Register, name = der entsprechende Begriff z. B. „Ausgangsrechnungen“
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="level">
+		<xsd:annotation>
+			<xsd:documentation>Das Element „level“ definiert eine der Hierarchieebenen in der Ablage-Struktur.</xsd:documentation>
+			<xsd:documentation>In Belege online wird das Dokument unter Belege | Ordner abgelegt. Es kann dann die Kategorie, der Ordner und das Register ausgewählt werden. Die Ebenen müssen in der document.xml in der korrekten Reihenfolge angegeben werden.
+Existieren die angegebene Kategorie, der Ordner und/oder das Register noch nicht, werden diese automatisch durch das Programm angelegt.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="id" type="de:p27" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Gibt die Hierachieebene an.</xsd:documentation>
+				<xsd:documentation>Definition für Level-id und -Name:
+id = 1 entspricht der Kategorie, name = der entsprechende Begriff z. B. „Buchführung“
+id = 2 entspricht dem Ordner, name = der entsprechende Begriff z. B. „FIBU“
+id = 3 entspricht dem Register, name = der entsprechende Begriff z. B. „Ausgangsrechnungen“
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="name" type="de:p10008" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Gibt die Bezeichnung der Hierachieebene an.</xsd:documentation>
+				<xsd:documentation>Definition für Level-id und -Name:
+id = 1 entspricht der Kategorie, name = der entsprechende Begriff z. B. „Buchführung“
+id = 2 entspricht dem Ordner, name = der entsprechende Begriff z. B. „FIBU“
+id = 3 entspricht dem Register, name = der entsprechende Begriff z. B. „Ausgangsrechnungen“
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<!-- abstract definition of extension -->
+	<xsd:complexType name="extension" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>Das Element extension kann mehrfach und in unterschiedlichen Ausprägungen vorkommen.</xsd:documentation>
+			<xsd:documentation>Die Ausprägung File kann pro Element document mehrfach vorkommen. Sie enthält die Belegbilder. Die aktuell zulässigen Formate für Belegbilder entnehmen Sie der Programmhilfe in Belege online.
+
+Die Ausprägung invoice kann pro Element document nur einmal vorkommen. Sie enthält die strukturierten Rechnungsdaten entsprechend dem Schema Belegwesen_online_invoice_v....xsd.
+
+Die Ausprägung cashLedger kann pro Element nur einmal vorkommen. Sie enthält die strukturierten Kassendaten entsprechend dem Schema Belegverwaltung_online_ledger_import_v....xsd.
+
+Die Ausprägung accountsPayableLedger kann pro Element nur einmal vorkommen. Sie enthält die Belegsatzdaten für Eingangsrechnungen entsprechend dem Schema Belegverwaltung_online_ledger_import_v....xsd.
+
+Die Ausprägung accountsReceivableLedger kann pro Element nur einmal vorkommen. Sie enthält die Belegsatzdaten für Ausgangsrechnungen entsprechend dem Schema Belegverwaltung_online_ledger_import_v....xsd.
+</xsd:documentation>
+		</xsd:annotation>
+	</xsd:complexType>
+	<xsd:complexType name="Invoice">
+		<xsd:annotation>
+			<xsd:documentation>Eine Ausprägung der Erweiterung "extension". Sie enthält die Informationen über die strukturierten Rechnungsdaten.</xsd:documentation>
+			<xsd:documentation>Bei der Ausprägung invoice müssen neben dem Namen der Datei der Rechnungsdaten noch die Eigenschaften Eingangsrechnung (invoiceType = Incoming) oder Ausgangsrechnung (invoiceType = Outgoing) angegeben werden. 
+Über die Ausprägung invoice werden dem Dokument Rechnungsinformationen zugeordnet. Beachten Sie, dass keine processID = 1 verwendet werden kann, wenn Rechnungsinformationen mitgeliefert werden.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="extension">
+				<xsd:sequence>
+					<xsd:element name="property" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Das Element „property“ enthält die Attribute zur Beschreibung des Extensiontyps "Invoice".</xsd:documentation>
+							<xsd:documentation>Das Element property enthält die Attribute zur Beschreibung der Datei mit den strukturierten Rechnungsdaten. Das Element property muss angegeben werden. Es spezifiziert die vorliegende Extension.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:attribute name="value" type="de:p18" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „value“ enthält immer den Wert zur erweiterten Beschreibung (key).</xsd:documentation>
+									<xsd:documentation>Das Attribut value definiert den Rechnungstyp. Bei Eingangsrechnungen ist der Typ „Incoming“, bei Ausgangsrechnungen „Outgoing“. </xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="key" type="de:p19" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „key“ enthält immer die erweiterte Beschreibung der vorliegenden Extension</xsd:documentation>
+									<xsd:documentation>Das Attribut key definiert den Rechnungstyp. Der Typ ist  „InvoiceType“.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="datafile" type="de:p20" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Name der XML-Datei, die die Rechnung enthält.</xsd:documentation>
+						<xsd:documentation>Das Attribut datafile enthält immer den Dateinamen des mitgelieferten Dokuments.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="File">
+		<xsd:annotation>
+			<xsd:documentation>Die Extension "File" enthält die Informationen für die Bilddateien der Rechnung, sowie Signatur-Informationen, wenn es sich um eine elektronische Rechnung handelt. </xsd:documentation>
+			<xsd:documentation>Über die Ausprägung File werden dem Dokument die Belegdateien, d. h. die visualisierte Rechnung (Belegbild) und optional weitere Dateien (Anhänge), zugeordnet. Die Belegdateien werden entweder in einem Ordner oder im Posteingang bereitgestellt. Werden mehrere Belegdateien einem Dokument zugeordnet, werden diese in Belege online zu einem Dokument geheftet.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="extension">
+				<xsd:attribute name="name" type="de:p20" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Übertragene Datei, z.B. eingescanntes Belegbild oder aus einem System erstellte Bilddatei.</xsd:documentation>
+						<xsd:documentation>Das Attribut file enthält den Namen der Bilddatei. Sonderzeichen im Beleg-Dateinamen müssen dem encoding ISO-8859-1 entsprechen. Der Dateiname muss in der document.xml nach dem entsprechenden Format (z. B. UTF-8) mit Maskierung des entsprechenden Sonderzeichens verwendet werden. Empfehlung: keine Dateinamen mit Sonderzeichen z. B. „-„ verwenden.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- neu für KABU -->
+	<xsd:complexType name="cashLedger">
+		<xsd:annotation>
+			<xsd:documentation>Eine Ausprägung der Erweiterung "extension". Sie enthält die Informationen über die strukturierten Kassendaten.</xsd:documentation>
+			<xsd:documentation>Über die Ausprägung cashLedger werden dem Dokument Kassendaten in strukturierter Form zugeordnet. Beachten Sie, dass keine processID = 1 verwendet werden kann, wenn Kasseninformationen mitgeliefert werden. Den Kasseninformationen wird in jedem Fall ein Import-Protokoll der übernommenen Kassensätze zugeordnet. Zusätzlich mitgelieferte Belege werden an dieses Import-Protokoll geheftet. Das Import-Protokoll (mit den evtl. angehefteten Belegen) wird mit den Belegsätzen im Kassenbuch online verknüpft. Es wird in Belege online im Ordner abgelegt. Eine GUID kann diesem Import-Protokoll nicht über die Dokumentenverwaltungsdatei zugeordnet werden.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="extension">
+				<xsd:sequence>
+					<xsd:element name="property" minOccurs="1" maxOccurs="2">
+						<xsd:annotation>
+							<xsd:documentation>Das Element „property“ enthält die Attribute zur Beschreibung des Extensiontyps "cashLedger".</xsd:documentation>
+							<xsd:documentation>Das Element property enthält die Attribute zur Beschreibung der Datei mit den strukturierten Kassendaten. Das Element property muss angegeben werden. Es spezifiziert die vorliegende Extension.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:attribute name="value" type="cashPropertyValue" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „value“ enthält immer den Wert zur erweiterten Beschreibung (key).</xsd:documentation>
+									<xsd:documentation>Das Attribut value enthält immer die erweiterte Beschreibung der vorliegenden Extension. 
+Es kann nur Value 2 oder 3 angegeben werden. 
+value = 1, key enthält die Periode der Kassenbelegdaten z. B. „20XX-01“ für Januar 20XX
+value = 2, key enthält die Kassenkontonummer in Kassenbuch online z. B. „1000“
+value = 3, key enthält die Kassenbezeichnung in Kassenbuch online z. B. „Kasse“
+</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="key" type="de:p32" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „key“ enthält immer die erweiterte Beschreibung der vorliegenden Extension</xsd:documentation>
+									<xsd:documentation>Das Attribut key enthält immer die erweiterte Beschreibung der vorliegenden Extension.
+key zu value 1 enthält die Periode der Kassenbelegdaten z. B. „20XX-01“ für Januar 20XX
+key zu value 2 enthält die Kassenkontonummer in Kassenbuch online z. B. „1000“
+key zu value 3 enthält die Kassenbezeichnung in Kassenbuch online z. B. „Kasse“
+</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="datafile" type="de:p20" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Name der XML-Datei, die die Kassendaten enthält.</xsd:documentation>
+						<xsd:documentation>Das Attribut datafile enthält immer den Dateinamen des mitgelieferten Dokuments.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- Ende neu für KABU -->
+<!-- neu für KABU-PayPal cashLedgerPayPal wird nur interne für PayPal-Import verwendet -->
+	<xsd:complexType name="cashLedgerPayPal">
+		<xsd:annotation>
+			<xsd:documentation>Eine Ausprägung der Erweiterung "extension". Sie enthält die Informationen über die strukturierten Kassendaten(PayPal-Import).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="extension">
+				<xsd:sequence>
+					<xsd:element name="property" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Das Element „property“ enthält die Attribute zur Beschreibung des Extensiontyps "cashLedger".</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:attribute name="value" type="cashPropertyValue" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „value“ enthält immer den Wert zur erweiterten Beschreibung (key).</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="key" type="de:p32" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „key“ enthält immer die erweiterte Beschreibung der vorliegenden Extension</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="datafile" type="de:p20" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Name der XML-Datei, die die Kassendaten(PayPal) enthält.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+  <!-- Ende neu für KABU-PayPal -->
+	<!-- neu für REBU -->
+	<xsd:complexType name="accountsPayableLedger">
+		<xsd:annotation>
+			<xsd:documentation>Eine Ausprägung der Erweiterung "extension". Sie enthält die Informationen über die strukturierten Rechnungseingangsdaten.</xsd:documentation>
+			<xsd:documentation>Bei der Ausprägung accountsPayableLedger müssen neben dem Namen der Belegsatzdatendatei für Eingangsrechnungen noch die Eigenschaften Buchungszeitraum (key = 1) und Bezeichnung des Rechnungseingangsordners (key = 3) 
+angegeben werden. Bei Anlage des Rechnungseingangs wird von DATEV Unternehmen online „Eingangsrechnungen“ als Bezeichnung für den Rechnungsordner vorgeschlagen.
+Über die Ausprägung accountsPayableLedger werden dem Dokument die Belegsatzdaten für Eingangsrechnungen zugeordnet. Beachten Sie, dass keine processID = 1 verwendet werden kann, wenn Belegsatzdaten für Eingangsrechnungen mitgeliefert werden. Den Belegsatzdaten für Eingangsrechnungen wird in jedem Fall ein Import-Protokoll der übernommenen Rechnungseingangssätze 
+zugeordnet. Zusätzlich mitgelieferte Belege werden vor dieses Import-Protokoll geheftet. Das Import-Protokoll (mit den evtl. angehefteten Belegen) wird mit den Belegsätzen in Belege online verknüpft. Eine GUID kann diesem Import-Protokoll nicht über die Dokumentenverwaltungsdatei zugeordnet werden.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="extension">
+				<xsd:sequence>
+					<xsd:element name="property" minOccurs="1" maxOccurs="2">
+						<xsd:annotation>
+							<xsd:documentation>Das Element „property“ enthält die Attribute zur Beschreibung des Extensiontyps "accountsPayableLedger".</xsd:documentation>
+							<xsd:documentation>Das Element property enthält die Attribute zur Beschreibung der Datei mit den strukturierten Rechnungsdaten für den Rechnungseingang. Das Element property muss angegeben werden. Es spezifiziert die vorliegende Extension.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:attribute name="value" type="invoicePropertyValue" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „value“ enthält immer den Wert zur erweiterten Beschreibung (key).</xsd:documentation>
+									<xsd:documentation>Das Attribut value enthält immer die erweiterte Beschreibung der vorliegenden Extension.
+value = 1, key enthält die Periode der Rechnungseingangsbelegdaten z. B. „20XX-01“ für Januar 20XX
+value = 3, key enthält die Rechnungseingangsordnerbezeichnung in Belege online z. B. „Rechnungseingang“
+</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="key" type="de:p32" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „key“ enthält immer die erweiterte Beschreibung der vorliegenden Extension</xsd:documentation>
+									<xsd:documentation>Das Attribut key enthält immer die erweiterte Beschreibung der vorliegenden Extension.
+key zu value 1 enthält die Periode der Rechnungseingangsbelegdaten z. B. „20XX-01“ für Januar 20XX
+key zu value 3 enthält die Rechnungseingangsordnerbezeichnung in Belege online z. B. „Rechnungseingang“
+</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="datafile" type="de:p20" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Name der XML-Datei, die die Rechnungseingangs enthält.</xsd:documentation>
+						<xsd:documentation>Das Attribut datafile enthält immer den Dateinamen des mitgelieferten Dokuments.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- Ende neu für REBU -->
+	<!-- neu für RABU -->
+	<xsd:complexType name="accountsReceivableLedger">
+		<xsd:annotation>
+			<xsd:documentation>Eine Ausprägung der Erweiterung "extension". Sie enthält die Informationen über die strukturierten Rechnungsausgangsdaten.</xsd:documentation>
+			<xsd:documentation>Bei der Ausprägung accountsReceivableLedger müssen neben dem Namen der Belegsatzdaten für Ausgangsrechnungen noch die Eigenschaften Buchungszeitraum   (key = 1) und Bezeichnung des Rechnungsausgangsordners (key = 3) angegeben werden. Bei Anlage des Rechnungsausgangs in Belege online wird vom System „Ausgangsrechnungen“ als Bezeichnung für den Rechnungsordner   vorgeschlagen.
+Über die Ausprägung accountsReceivableLedger werden dem Dokument Belegsatzdaten für Ausgangsrechnungen zugeordnet. Beachten Sie, dass keine processID = 1 verwendet werden kann, wenn Belegsatzdaten für Ausgangsrechnungen mitgeliefert werden. Den Belegsatzdaten für Ausgangsrechnungen wird in jedem Fall ein Import-Protokoll der übernommenen Rechnungsausgangssätze zugeordnet.
+Zusätzlich mitgelieferte Belege werden vor dieses Import-Protokoll geheftet. Das Import-Protokoll (mit den evtl. angehefteten Belegen) wird mit den Belegsätzen Belege online verknüpft. Eine GUID kann diesem Import-Protokoll nicht über die Dokumentenverwaltungsdatei zugeordnet werden.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="extension">
+				<xsd:sequence>
+					<xsd:element name="property" minOccurs="1" maxOccurs="2">
+						<xsd:annotation>
+							<xsd:documentation>Das Element „property“ enthält die Attribute zur Beschreibung des Extensiontyps "accountsReceivableLedger".</xsd:documentation>
+							<xsd:documentation>Das Element property enthält die Attribute zur Beschreibung der Datei mit den strukturierten Rechnungsdaten für den Rechnungseingang. Das Element property muss angegeben werden. Es spezifiziert die vorliegende Extension.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:attribute name="value" type="invoicePropertyValue" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „value“ enthält immer den Wert zur erweiterten Beschreibung (key).</xsd:documentation>
+									<xsd:documentation>Das Attribut value enthält immer die erweiterte Beschreibung der vorliegenden Extension.
+value = 1, key enthält die Periode der Rechnungsausgangsbelegdaten z. B. „20XX-01“ für Januar 20XX
+value = 3, key enthält die Rechnungsausgangsordnerbezeichnung in Belege online z. B. „Rechnungsausgang“
+</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="key" type="de:p32" use="required">
+								<xsd:annotation>
+									<xsd:documentation>Das Attribut „key“ enthält immer die erweiterte Beschreibung der vorliegenden Extension</xsd:documentation>
+									<xsd:documentation>Das Attribut key enthält immer die erweiterte Beschreibung der vorliegenden Extension.
+key zu value 1 enthält die Periode der Rechnungsausgangsbelegdaten z. B. „20XX-01“ für Januar 20XX
+key zu value 3 enthält die Rechnungsausgangsordnerbezeichnung in Belege online z. B. „Rechnungsausgang“
+</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="datafile" type="de:p20" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Name der XML-Datei, die die Rechnungseingangs enthält.</xsd:documentation>
+						<xsd:documentation>Das Attribut datafile enthält immer den Dateinamen des mitgelieferten Dokuments.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- Ende neu für RABU -->
+	<!-- neu SEPA-File extension-->
+	<xsd:complexType name="SEPAFile">
+		<xsd:annotation>
+			<xsd:documentation>Die Extension "SEPAFile" enthält die Informationen für die SEPA/DTAUS-Datei.</xsd:documentation>
+			<xsd:documentation>Für die Auflösung von Sammelzahlungen in Kanzlei-Rechnungswesen kann eine SEPA-xml-/DTAUS-Datei übergeben werden. Die Datei muss zwingend in den Posteingang vorhanden sein.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="extension">
+				<xsd:attribute name="name" type="de:p20" use="required">
+					<xsd:annotation>
+						<xsd:documentation>SEPA-/DTAUS-Datei</xsd:documentation>
+						<xsd:documentation>Bei der Ausprägung SEPAFile muss der Name der Datei der Sammelzahlungssätze (DTAUS/SEPA-xml-Datei) angegeben werden. In Kanzlei-Rechnungswesen erfolgt durch die Übernahme dieser SEPA/DTAUS-Datei die Auflösung der Sammelzahlung in Einzelzahlungsbuchungen.
+Beachten Sie, dass zwingend processID = 1 (Ablage im Posteingang) verwendet werden muss. Eine Kombination der Sammelzahlungssätze mit anderen Daten (file, invoice, cashLedger, accountsPayableLedger und accountsReceivableLedger) ist nicht zulässig.
+Sonderzeichen im SEPA-Dateinamen müssen dem encoding ISO-8859-1 entsprechen. Der Dateiname muss in der document.xml nach dem entsprechenden Format (z. B. UTF-8) mit Maskierung des entsprechenden Sonderzeichens verwendet werden. Empfehlung: keine Dateinamen mit Sonderzeichen z. B. „-„ verwenden.
+</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- end-of abstract definition of extension -->
+	<!-- neu für KABU-->
+	<xsd:simpleType name="cashPropertyValue">
+		<xsd:annotation>
+			<xsd:documentation>Zusammenfassung unterschiedlicher Wertebereiche, die in Abhängigkeit vom gesetzten Key der Extension Key zum CashLedger erlaubt sind. (de:p28 für die Periode (Key: 1 = period); de:p10039 für Kassenkonto-Nummer (Key:2 = cashAccount); de:p10009 für die Kassenbezeichnung (Key: 3 = cashName)). Dieser SimpleType umfasst einen pro Key exakt spezifizierten Wertebereich des korrespondieren Value der Extension Key.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="de:p28 de:p10039 de:p10009"/>
+	</xsd:simpleType>
+	<!-- end-of abstract definition of extension -->
+	<!-- neu für REBU/RABU-->
+	<xsd:simpleType name="invoicePropertyValue">
+		<xsd:annotation>
+			<xsd:documentation>Zusammenfassung unterschiedlicher Wertebereiche, die in Abhängigkeit vom gesetzten Key der Extension Key zum accountsPayableLedger oder accountsReceivableLedger erlaubt sind. (de:p28 für die Periode (Key: 1 = period); de:p10009 für die Rechnungseingangs- oder -ausgangsordnerbezeichnung (Key: 3 = accountsPayableLedger oder accountsReceivableLedger)). Dieser SimpleType umfasst einen pro Key exakt spezifizierten Wertebereich des korrespondieren Value der Extension Key.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="de:p28 de:p10009"/>
+	</xsd:simpleType>
+	<!-- end-of abstract definition of extension -->
+</xsd:schema>
