@@ -26,7 +26,7 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
 
     protected function getXsdPath(): string
     {
-        return 'xsds/Belegverwaltung_online_ledger_import_v060.xsd';
+        return __DIR__.'/../../xsds/Belegverwaltung_online_ledger_import_v060.xsd';
     }
 
     public function generate(): self

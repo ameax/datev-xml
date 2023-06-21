@@ -21,7 +21,7 @@ class DatevDocumentXmlGenerator extends AbstractXmlGenerator
 
     protected function getXsdPath(): string
     {
-        return 'xsds/Document_v060.xsd';
+        return __DIR__.'/../../xsds/Document_v060.xsd';
     }
 
     public function generate(): self
