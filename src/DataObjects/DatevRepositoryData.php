@@ -71,7 +71,7 @@ class DatevRepositoryData
             DatevDocumentData::TYPE_ACCOUNTS_RECEIVABLE_LEDGER => 'Ausgangsrechnungen',
             DatevDocumentData::TYPE_CASH_LEDGER => 'Kasse',
             DatevDocumentData::TYPE_FILE => 'Dateien',
-            DatevDocumentData::TYPE_SEPA_FILE => 'Sepa-Dateien',
+            DatevDocumentData::TYPE_SEPA_FILE => 'SEPA-Dateien',
             default => ''
         };
     }
@@ -83,7 +83,7 @@ class DatevRepositoryData
             DatevDocumentData::TYPE_ACCOUNTS_RECEIVABLE_LEDGER => 'RA',
             DatevDocumentData::TYPE_CASH_LEDGER => 'Kasse',
             DatevDocumentData::TYPE_FILE => 'Dateien',
-            DatevDocumentData::TYPE_SEPA_FILE => 'Sepa',
+            DatevDocumentData::TYPE_SEPA_FILE => 'SEPA',
             default => ''
         };
     }

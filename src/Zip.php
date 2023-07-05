@@ -20,7 +20,8 @@ class Zip
     public function __construct()
     {
         $this->temporaryDirectory = new TemporaryDirectory();
-        $this->temporaryDirectory->name('ameax-datev')->force()->create();
+        $this->temporaryDirectory->create(); //name('ameax-datev')->force()->
+
         $this->zipArchive = new ZipArchive();
         $this->zipPath = $this->temporaryDirectory->path('datev.zip');
         $this->zipArchive->open($this->zipPath, ZipArchive::CREATE);
