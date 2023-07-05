@@ -51,6 +51,15 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
         return $this;
     }
 
+    private function maxLength(?string $string, int $maxLength): ?string
+    {
+        if (! $string) {
+            return $string;
+        }
+
+        return substr($string, 0, $maxLength);
+    }
+
     private function getAccountsReceivableLedgerElements(): array
     {
         $output = [];
@@ -67,10 +76,10 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
                 'costCategoryId' => $ledger['costCategoryId'] ?? $this->datevAccountLedgerData->costCategoryId ?? null,
                 'costCategoryId2' => $ledger['costCategoryId2'] ?? $this->datevAccountLedgerData->costCategoryId2 ?? null,
                 'tax' => DatevHelpers::formatAmount($ledger['tax']),
-                'information' => $ledger['information'] ?? null,
+                'information' => $this->maxLength($ledger['information'] ?? null, 120),
                 'currencyCode' => $ledger['currencyCode'] ?? $this->datevAccountLedgerData->consolidatedCurrencyCode,
                 'invoiceId' => $this->datevAccountLedgerData->consolidatedInvoiceId,
-                'bookingText' => $ledger['bookingText'],
+                'bookingText' => $this->maxLength($ledger['bookingText'], 60),
                 'typeOfReceivable' => $ledger['typeOfReceivable'],
                 'ownVatId' => $this->datevAccountLedgerData->ownVatId,
                 'shipFromCountry' => $this->datevAccountLedgerData->shipFromCountry,
@@ -96,8 +105,8 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
                 'bpAccountNo' => $this->datevAccountLedgerData->bpAccountNo,
                 'deliveryDate' => isset($ledger['deliveryDate']) ? $ledger['deliveryDate']->format('Y-m-d') : null,
                 'orderId' => $ledger['orderId'],
-                'customerName' => $this->datevAccountLedgerData->customerName,
-                'customerCity' => $this->datevAccountLedgerData->customerCity,
+                'customerName' => $this->maxLength($this->datevAccountLedgerData->customerName, 50),
+                'customerCity' => $this->maxLength($this->datevAccountLedgerData->customerCity, 30),
             ];
 
             $output[] = ['accountsReceivableLedger' => DatevHelpers::clearNullValues($data)];
