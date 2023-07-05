@@ -56,8 +56,8 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
         if (! $string) {
             return $string;
         }
-        // sanitize control characters
-        return substr(preg_replace('/[\x00-\x1F\x7F]/', '', $string), 0, $maxLength);
+
+        return mb_substr($string, 0, $maxLength);
     }
 
     private function getAccountsReceivableLedgerElements(): array
