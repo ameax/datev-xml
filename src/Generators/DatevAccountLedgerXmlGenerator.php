@@ -60,6 +60,24 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
         return mb_substr($string, 0, $maxLength);
     }
 
+    private function upper(?string $string): ?string
+    {
+        if (! $string) {
+            return $string;
+        }
+
+        return mb_strtoupper($string);
+    }
+
+    private function removeSpaces(?string $string): ?string
+    {
+        if (! $string) {
+            return $string;
+        }
+
+        return preg_replace("/\s/", '', $string);
+    }
+
     private function getAccountsReceivableLedgerElements(): array
     {
         $output = [];
@@ -81,18 +99,18 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
                 'invoiceId' => $this->datevAccountLedgerData->consolidatedInvoiceId,
                 'bookingText' => $this->maxLength($ledger['bookingText'], 60),
                 'typeOfReceivable' => $ledger['typeOfReceivable'],
-                'ownVatId' => $this->datevAccountLedgerData->ownVatId,
+                'ownVatId' => $this->upper($this->removeSpaces($this->datevAccountLedgerData->ownVatId)),
                 'shipFromCountry' => $this->datevAccountLedgerData->shipFromCountry,
                 'partyId' => $this->datevAccountLedgerData->partyId,
                 'paidAt' => $this->datevAccountLedgerData->paidAt?->format('Y-m-d'),
                 'internalInvoiceId' => $this->datevAccountLedgerData->internalInvoiceId,
-                'vatId' => $this->datevAccountLedgerData->vatId,
+                'vatId' => $this->upper($this->removeSpaces($this->datevAccountLedgerData->vatId)),
                 'shipToCountry' => $this->datevAccountLedgerData->shipToCountry,
                 'exchangeRate' => DatevHelpers::formatAmount($ledger['exchangeRate']),
                 'bankAccount' => $this->datevAccountLedgerData->bankAccount,
                 'bankCountry' => $this->datevAccountLedgerData->bankCountry,
-                'iban' => $this->datevAccountLedgerData->iban,
-                'swiftCode' => $this->datevAccountLedgerData->swiftCode,
+                'iban' => $this->upper($this->removeSpaces($this->datevAccountLedgerData->iban)),
+                'swiftCode' => $this->upper($this->removeSpaces($this->datevAccountLedgerData->swiftCode)),
                 'accountName' => $this->datevAccountLedgerData->accountName,
                 'paymentConditionsId' => $this->datevAccountLedgerData->paymentConditionsId,
                 'paymentOrder' => $this->datevAccountLedgerData->paymentOrder,
