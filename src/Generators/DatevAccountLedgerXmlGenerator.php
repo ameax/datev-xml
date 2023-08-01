@@ -12,7 +12,7 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
 
     const MODE_RECEIVABLE_LEDGER = 'receivable';
 
-    public string               $ns = '{http://xml.datev.de/bedi/tps/ledger/v060}';
+    public string $ns = '{http://xml.datev.de/bedi/tps/ledger/v060}';
 
     public string $mode;
 

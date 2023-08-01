@@ -8,7 +8,7 @@ use Ameax\Datev\Serializers\DatevDocumentRoot;
 
 class DatevDocumentXmlGenerator extends AbstractXmlGenerator
 {
-    public string               $ns = '{http://xml.datev.de/bedi/tps/document/v06.0}';
+    public string $ns = '{http://xml.datev.de/bedi/tps/document/v06.0}';
 
     protected DatevDocumentData $datevDocumentData;
 

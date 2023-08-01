@@ -10,9 +10,9 @@ abstract class AbstractXmlGenerator
 {
     protected Service $service;
 
-    protected string  $xml;
+    protected string $xml;
 
-    public string               $xsi = '{http://www.w3.org/2001/XMLSchema-instance}';
+    public string $xsi = '{http://www.w3.org/2001/XMLSchema-instance}';
 
     public string $ns = '';
 

@@ -10,9 +10,9 @@ class Zip
 {
     public TemporaryDirectory $temporaryDirectory;
 
-    public ZipArchive         $zipArchive;
+    public ZipArchive $zipArchive;
 
-    protected string          $zipPath;
+    protected string $zipPath;
 
     /**
      * @throws PathAlreadyExists

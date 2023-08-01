@@ -9,7 +9,7 @@ class DatevHelpers
         return str_replace(['{', '}'], ['', ''], $namespace);
     }
 
-    public static function formatAmount(null|float $amount): string|null
+    public static function formatAmount(?float $amount): ?string
     {
         if (! isset($amount)) {
             return null;
