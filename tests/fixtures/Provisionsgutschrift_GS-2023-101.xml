@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<LedgerImport xmlns="http://xml.datev.de/bedi/tps/ledger/v060" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.datev.de/bedi/tps/ledger/v060 Belegverwaltung_online_ledger_import_v060.xsd" version="6.0" generator_info="ameax" generating_system="ameax\datev" xml_data="Kopie nur zur Verbuchung berechtigt nicht zum Vorsteuerabzug">
+ <consolidate consolidatedAmount="123.45" consolidatedDate="2023-01-12" consolidatedInvoiceId="GS-2023-101" consolidatedCurrencyCode="EUR">
+  <accountsPayableLedger>
+   <date>2023-01-12</date>
+   <amount>123.45</amount>
+   <accountNo>4760</accountNo>
+   <buCode>0</buCode>
+   <costCategoryId>10</costCategoryId>
+   <costCategoryId2>20</costCategoryId2>
+   <tax>19.00</tax>
+   <information>Provisionsgutschrift</information>
+   <currencyCode>EUR</currencyCode>
+   <invoiceId>GS-2023-101</invoiceId>
+   <bookingText>Provision, Art-Nr. Art123</bookingText>
+   <shipFromCountry>DE</shipFromCountry>
+   <partyId>K999</partyId>
+   <iban>DE33762500000121540061</iban>
+   <dueDate>2023-01-26</dueDate>
+   <bpAccountNo>10100</bpAccountNo>
+  </accountsPayableLedger>
+ </consolidate>
+</LedgerImport>

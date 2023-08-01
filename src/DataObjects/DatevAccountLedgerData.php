@@ -9,6 +9,14 @@ class DatevAccountLedgerData
 {
     protected array $accountsReceivableLedgers = [];
 
+    protected array $accountsPayableLedgers = [];
+
+    protected string $mode;
+
+    const MODE_PAYABLE_LEDGER = 'payable';
+
+    const MODE_RECEIVABLE_LEDGER = 'receivable';
+
     /**
      * consolidatedAmount is calculated by the AccountsReceivableLedgers
      */
@@ -23,6 +31,8 @@ class DatevAccountLedgerData
 
         public ?string $customerName = null,
         public ?string $customerCity = null,
+        public ?string $supplierName = null,
+        public ?string $supplierCity = null,
         public ?string $ownVatId = null,
         public ?string $shipFromCountry = null,
         public ?string $partyId = null, //customer number
@@ -71,6 +81,7 @@ class DatevAccountLedgerData
         ?string $orderId = null,
 
     ): self {
+        $this->mode = self::MODE_RECEIVABLE_LEDGER;
         $this->consolidatedAmount += $amount;
 
         $this->accountsReceivableLedgers[] = [
@@ -105,6 +116,65 @@ class DatevAccountLedgerData
         return $this->accountsReceivableLedgers;
     }
 
+    public function addAccountsPayableLedger(
+        float $amount,
+        string $accountNo,
+        ?string $buCode = null,
+        ?string $information = null,
+        ?float $tax = null,
+        ?Carbon $date = null,
+        ?string $bookingText = null,
+        ?string $currencyCode = null,
+        ?float $exchangeRate = null,
+        ?string $typeOfReceivable = null,
+        ?float $costAmount = null,
+        ?string $costCategoryId = null,
+        ?string $costCategoryId2 = null,
+        ?float $discountAmount = null,
+        ?float $discountPercentage = null,
+        ?Carbon $discountPaymentDate = null,
+        ?Carbon $discountAmount2 = null,
+        ?float $discountPercentage2 = null,
+        ?Carbon $discountPaymentDate2 = null,
+        ?Carbon $deliveryDate = null,
+        ?string $orderId = null,
+
+    ): self {
+        $this->mode = self::MODE_PAYABLE_LEDGER;
+        $this->consolidatedAmount += $amount;
+
+        $this->accountsPayableLedgers[] = [
+            'amount' => $amount,
+            'accountNo' => $accountNo,
+            'buCode' => $buCode,
+            'information' => $information,
+            'tax' => $tax,
+            'date' => $date,
+            'bookingText' => $bookingText,
+            'currencyCode' => $currencyCode,
+            'typeOfReceivable' => $typeOfReceivable,
+            'costAmount' => $costAmount,
+            'costCategoryId' => $costCategoryId,
+            'costCategoryId2' => $costCategoryId2,
+            'discountAmount' => $discountAmount,
+            'discountPercentage' => $discountPercentage,
+            'discountPaymentDate' => $discountPaymentDate,
+            'discountAmount2' => $discountAmount2,
+            'discountPercentage2' => $discountPercentage2,
+            'discountPaymentDate2' => $discountPaymentDate2,
+            'deliveryDate' => $deliveryDate,
+            'orderId' => $orderId,
+            'exchangeRate' => $exchangeRate,
+        ];
+
+        return $this;
+    }
+
+    public function getAccountsPayableLedgers(): array
+    {
+        return $this->accountsPayableLedgers;
+    }
+
     /**
      * @throws \Exception
      */
@@ -116,5 +186,10 @@ class DatevAccountLedgerData
         $generator->validate();
 
         return $generator->getXmlString();
+    }
+
+    public function getMode(): string
+    {
+        return $this->mode;
     }
 }

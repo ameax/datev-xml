@@ -49,7 +49,7 @@ composer require ameax/datev-xml
         bookingText: 'Umsatz 7%'
     );
 
-    $datevDocumentData->buildAccountsPayableLedger(
+    $datevDocumentData->buildAccountsReceivableLedger(
         datevAccountLedgerData: $ledgerData,
         filePaths             : ['path-to-invoice.pdf']
     );
