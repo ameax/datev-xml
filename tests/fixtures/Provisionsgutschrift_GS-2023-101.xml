@@ -18,6 +18,8 @@
    <iban>DE33762500000121540061</iban>
    <dueDate>2023-01-26</dueDate>
    <bpAccountNo>10100</bpAccountNo>
+   <supplierName>Mustermann</supplierName>
+   <supplierCity>Musterort</supplierCity>
   </accountsPayableLedger>
  </consolidate>
 </LedgerImport>

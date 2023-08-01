@@ -185,8 +185,8 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
                 'bpAccountNo' => $this->datevAccountLedgerData->bpAccountNo,
                 'deliveryDate' => isset($ledger['deliveryDate']) ? $ledger['deliveryDate']->format('Y-m-d') : null,
                 'orderId' => $ledger['orderId'],
-                'customerName' => $this->maxLength($this->datevAccountLedgerData->customerName, 50),
-                'customerCity' => $this->maxLength($this->datevAccountLedgerData->customerCity, 30),
+                'supplierName' => $this->maxLength($this->datevAccountLedgerData->supplierName, 50),
+                'supplierCity' => $this->maxLength($this->datevAccountLedgerData->supplierCity, 30),
             ];
 
             $output[] = ['accountsPayableLedger' => DatevHelpers::clearNullValues($data)];
