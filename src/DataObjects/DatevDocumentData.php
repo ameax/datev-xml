@@ -32,7 +32,7 @@ class DatevDocumentData
         }
     }
 
-    public function setDescription(string $description = null): self
+    public function setDescription(?string $description = null): self
     {
         $this->description = $description;
 
@@ -44,7 +44,7 @@ class DatevDocumentData
         string $xmlContent,
         Carbon $date,
         array $filePaths = [],
-        DatevRepositoryData $datevRepositoryData = null,
+        ?DatevRepositoryData $datevRepositoryData = null,
     ): self {
 
         $document = [
@@ -67,7 +67,7 @@ class DatevDocumentData
     public function buildAccountsPayableLedger(
         DatevAccountLedgerData $datevAccountLedgerData,
         array $filePaths = [],
-        DatevRepositoryData $datevRepositoryData = null,
+        ?DatevRepositoryData $datevRepositoryData = null,
     ): self {
         $xmlContent = $datevAccountLedgerData->generateXml();
 
@@ -90,7 +90,7 @@ class DatevDocumentData
         string $xmlContent,
         Carbon $date,
         array $filePaths = [],
-        DatevRepositoryData $datevRepositoryData = null
+        ?DatevRepositoryData $datevRepositoryData = null
     ): self {
 
         $document = [
@@ -113,7 +113,7 @@ class DatevDocumentData
     public function buildAccountsReceivableLedger(
         DatevAccountLedgerData $datevAccountLedgerData,
         array $filePaths = [],
-        DatevRepositoryData $datevRepositoryData = null,
+        ?DatevRepositoryData $datevRepositoryData = null,
     ): self {
         $xmlContent = $datevAccountLedgerData->generateXml();
 
@@ -137,7 +137,7 @@ class DatevDocumentData
         Carbon $date,
         string $cashAccountNumber,
         array $filePaths = [],
-        DatevRepositoryData $datevRepositoryData = null
+        ?DatevRepositoryData $datevRepositoryData = null
     ): self {
         $document = [
             'type' => self::TYPE_CASH_LEDGER,
@@ -158,7 +158,7 @@ class DatevDocumentData
         string $nameWithExtension,
         string $filePath,
         ?Carbon $date,
-        DatevRepositoryData $datevRepositoryData = null
+        ?DatevRepositoryData $datevRepositoryData = null
     ): self {
         $document = [
             'type' => self::TYPE_FILE,
@@ -177,7 +177,7 @@ class DatevDocumentData
         string $nameWithExtension,
         string $filePath,
         ?Carbon $date,
-        DatevRepositoryData $datevRepositoryData = null
+        ?DatevRepositoryData $datevRepositoryData = null
     ): self {
         $document = [
             'type' => self::TYPE_SEPA_FILE,
