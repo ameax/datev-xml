@@ -2,6 +2,18 @@
 
 All notable changes to `datev-xml` will be documented in this file.
 
+## 1.2.3 - 2023-12-15
+
+### What's Changed
+
+* 5 delivery date is missing in ledger xml by @ms-aranes in https://github.com/ameax/datev-xml/pull/6
+
+### New Contributors
+
+* @ms-aranes made their first contribution in https://github.com/ameax/datev-xml/pull/6
+
+**Full Changelog**: https://github.com/ameax/datev-xml/compare/1.2.2...1.2.3
+
 ## 1.2.2 - 2023-12-15
 
 **Full Changelog**: https://github.com/ameax/datev-xml/compare/1.2.0...1.2.2
