@@ -32,6 +32,6 @@ it(/**
     );
     $xml = $ledgerData->generateXml();
 
-    //    file_put_contents('tests/fixtures/Provisionsgutschrift_GS-2023-101.xml',$xml);
+    //        file_put_contents('tests/fixtures/Provisionsgutschrift_GS-2023-101.xml',$xml);
     expect($xml)->toEqual(file_get_contents('tests/fixtures/Provisionsgutschrift_GS-2023-101.xml'));
 });

@@ -31,7 +31,7 @@ it(/**
         bookingText: 'Produkt B, Art-Nr. Art456',
     );
     $xml = $ledgerData->generateXml();
-
+    //                   file_put_contents('tests/fixtures/Rechnungsdaten_RA_R-2023-101.xml',$xml);
     expect($xml)->toEqual(file_get_contents('tests/fixtures/Rechnungsdaten_RA_R-2023-101.xml'));
 });
 
@@ -90,7 +90,7 @@ it(/**
         orderId: '5KK77592Y773816',
     );
     $xml = $ledgerData->generateXml();
-
+    //               file_put_contents('tests/fixtures/Rechnungsdaten_RA_R-2023-204.xml',$xml);
     expect($xml)->toEqual(file_get_contents('tests/fixtures/Rechnungsdaten_RA_R-2023-204.xml'));
 });
 
@@ -121,6 +121,6 @@ it(/**
     );
 
     $xml = $ledgerData->generateXml();
-    //       file_put_contents('tests/fixtures/Rechnungsdaten_RA_R-2023-101-EU.xml',$xml);
+    //           file_put_contents('tests/fixtures/Rechnungsdaten_RA_R-2023-101-EU.xml',$xml);
     expect($xml)->toEqual(file_get_contents('tests/fixtures/Rechnungsdaten_RA_R-2023-101-EU.xml'));
 });
