@@ -45,6 +45,7 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
                         'consolidatedAmount' => DatevHelpers::formatAmount($this->datevAccountLedgerData->consolidatedAmount),
                         'consolidatedDate' => $this->datevAccountLedgerData->consolidatedDate->format('Y-m-d'),
                         'consolidatedInvoiceId' => $this->datevAccountLedgerData->consolidatedInvoiceId,
+                        'consolidatedDeliveryDate' => $this->datevAccountLedgerData->consolidatedDeliveryDate->format('Y-m-d'),
                         'consolidatedCurrencyCode' => $this->datevAccountLedgerData->consolidatedCurrencyCode,
                     ],
                     'value' => $this->mode === self::MODE_RECEIVABLE_LEDGER ? $this->getAccountsReceivableLedgerElements() : $this->getAccountsPayableLedgerElements(),

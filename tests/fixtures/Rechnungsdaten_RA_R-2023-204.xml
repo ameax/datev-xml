@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <LedgerImport xmlns="http://xml.datev.de/bedi/tps/ledger/v060" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.datev.de/bedi/tps/ledger/v060 Belegverwaltung_online_ledger_import_v060.xsd" version="6.0" generator_info="ameax" generating_system="ameax\datev" xml_data="Kopie nur zur Verbuchung berechtigt nicht zum Vorsteuerabzug">
- <consolidate consolidatedAmount="2587.00" consolidatedDate="2023-02-05" consolidatedInvoiceId="R-2023-204" consolidatedCurrencyCode="EUR">
+ <consolidate consolidatedAmount="2587.00" consolidatedDate="2023-02-05" consolidatedInvoiceId="R-2023-204" consolidatedDeliveryDate="2023-02-02" consolidatedCurrencyCode="EUR">
   <accountsReceivableLedger>
    <date>2023-02-05</date>
    <amount>1190.00</amount>
