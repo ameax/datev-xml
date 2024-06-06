@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ameax/xml-validator": "^1.0",
         "nesbot/carbon": "^2.67",
         "sabre/xml": "^4.0",
