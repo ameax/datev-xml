@@ -107,6 +107,30 @@ class DatevDocumentData
         return $this;
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function buildAccountsReceivableLedger(
+        DatevAccountLedgerData $datevAccountLedgerData,
+        array $filePaths = [],
+        ?DatevRepositoryData $datevRepositoryData = null,
+    ): self {
+        $xmlContent = $datevAccountLedgerData->generateXml();
+
+        $document = [
+            'type' => self::TYPE_ACCOUNTS_RECEIVABLE_LEDGER,
+            'name' => $datevAccountLedgerData->consolidatedInvoiceId,
+            'xml' => $xmlContent,
+            'date' => $datevAccountLedgerData->consolidatedDate,
+            'filePaths' => $filePaths,
+            'datevRepositoryData' => $datevRepositoryData,
+        ];
+
+        $this->data[] = $document;
+
+        return $this;
+    }
+
     public function addCashLedger(
         string $nameWithoutExtension,
         string $xmlContent,

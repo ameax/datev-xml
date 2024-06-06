@@ -39,6 +39,8 @@ it( /**
  * @throws Exception
  */ 'can generates multiple Files in a zip file', closure: function () {
 
+    $datevRepositoryData = DatevRepositoryData::make('ameax');
+
     $datevDocumentData = new DatevDocumentData();
 
     $ledgerData = new DatevAccountLedgerData(
@@ -65,12 +67,11 @@ it( /**
         bookingText: 'Umsatz 7%'
     );
 
-    $datevDocumentData->buildAccountsPayableLedger(
+    $datevDocumentData->buildAccountsReceivableLedger(
         datevAccountLedgerData: $ledgerData,
-        filePaths             : ['tests/fixtures/small.pdf']
+        filePaths             : ['tests/fixtures/small.pdf'],
+        datevRepositoryData: $datevRepositoryData
     );
-
-    $datevRepositoryData = new DatevRepositoryData();
 
     $datevDocumentData->addSEPAFile(
         nameWithExtension  : 'sepa-2023-12345.xml',
@@ -79,7 +80,7 @@ it( /**
         datevRepositoryData: $datevRepositoryData);
 
     $zipPath = $datevDocumentData->generateZip();
-
+    //file_put_contents(__DIR__.'/fixtures/export.zip',file_get_contents($zipPath));
     expect($zipPath)->toBeFile();
 
 });

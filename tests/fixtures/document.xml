@@ -32,7 +32,7 @@
    <extension xsi:type="SEPAFile" name="sepa-12345.xml"/>
    <repository>
     <level id="1" name="ameax"/>
-    <level id="2" name="Import 2023 Sepa"/>
+    <level id="2" name="Import 2023 SEPA"/>
     <level id="3" name="06"/>
    </repository>
   </document>
