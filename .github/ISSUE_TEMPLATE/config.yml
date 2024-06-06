@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Create an issue or Report a bug
+    url: https://github.com/ameax/datev-xml/issues/new
+    about: Create an issue or Report a reproducable bug
   - name: Ask a question
     url: https://github.com/ameax/datev-xml/discussions/new?category=q-a
     about: Ask the community for help
