@@ -61,6 +61,16 @@ class DatevDocumentData
         return $this;
     }
 
+    private function getLedgerName(DatevAccountLedgerData $datevAccountLedgerData): string
+    {
+        $name = $datevAccountLedgerData->consolidatedInvoiceId;
+        if ($datevAccountLedgerData->costCategoryId) {
+            $name .= '_'.$datevAccountLedgerData->costCategoryId;
+        }
+
+        return $name;
+    }
+
     /**
      * @throws \Exception
      */
@@ -73,7 +83,7 @@ class DatevDocumentData
 
         $document = [
             'type' => self::TYPE_ACCOUNTS_PAYABLE_LEDGER,
-            'name' => $datevAccountLedgerData->consolidatedInvoiceId,
+            'name' => $this->getLedgerName($datevAccountLedgerData),
             'xml' => $xmlContent,
             'date' => $datevAccountLedgerData->consolidatedDate,
             'filePaths' => $filePaths,
@@ -119,7 +129,7 @@ class DatevDocumentData
 
         $document = [
             'type' => self::TYPE_ACCOUNTS_RECEIVABLE_LEDGER,
-            'name' => $datevAccountLedgerData->consolidatedInvoiceId,
+            'name' => $this->getLedgerName($datevAccountLedgerData),
             'xml' => $xmlContent,
             'date' => $datevAccountLedgerData->consolidatedDate,
             'filePaths' => $filePaths,
