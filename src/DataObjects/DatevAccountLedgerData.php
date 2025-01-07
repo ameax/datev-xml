@@ -35,7 +35,7 @@ class DatevAccountLedgerData
         public ?string $supplierCity = null,
         public ?string $ownVatId = null,
         public ?string $shipFromCountry = null,
-        public ?string $partyId = null, //customer number
+        public ?string $partyId = null, // customer number
         public ?Carbon $paidAt = null,
         public ?string $internalInvoiceId = null,
         public ?string $vatId = null,
@@ -53,9 +53,7 @@ class DatevAccountLedgerData
         public ?string $costCategoryId2 = null,
         public ?string $generator_info = null,
         public ?string $generating_system = 'ameax\datev'
-    ) {
-
-    }
+    ) {}
 
     public function addAccountsReceivableLedger(
         float $amount,
@@ -180,7 +178,7 @@ class DatevAccountLedgerData
      */
     public function generateXml(): string
     {
-        $generator = new DatevAccountLedgerXmlGenerator();
+        $generator = new DatevAccountLedgerXmlGenerator;
         $generator->setDatevAccountLedgerData($this);
         $generator->generate();
         $generator->validate();

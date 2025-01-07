@@ -10,7 +10,7 @@ it( /**
  * @throws Exception
  */ 'can generate a zip file', function () {
 
-    $zip = new Zip();
+    $zip = new Zip;
     $path = $zip
         ->addFile(
             path                : 'tests/fixtures/Rechnungsdaten_RA_R-2023-101.xml',
@@ -41,7 +41,7 @@ it( /**
 
     $datevRepositoryData = DatevRepositoryData::make('ameax');
 
-    $datevDocumentData = new DatevDocumentData();
+    $datevDocumentData = new DatevDocumentData;
 
     $ledgerData = new DatevAccountLedgerData(
         consolidatedDate: new Carbon('2023-06-14'),
@@ -80,7 +80,7 @@ it( /**
         datevRepositoryData: $datevRepositoryData);
 
     $zipPath = $datevDocumentData->generateZip();
-//    file_put_contents(__DIR__.'/fixtures/export.zip',file_get_contents($zipPath));
+    //    file_put_contents(__DIR__.'/fixtures/export.zip',file_get_contents($zipPath));
     expect($zipPath)->toBeFile();
 
 });

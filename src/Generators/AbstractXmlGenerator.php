@@ -18,7 +18,7 @@ abstract class AbstractXmlGenerator
 
     public function __construct()
     {
-        $this->service = new Service();
+        $this->service = new Service;
         $this->service->namespaceMap[DatevHelpers::cleanXmlNamespace($this->ns)] = '';
         $this->service->namespaceMap[DatevHelpers::cleanXmlNamespace($this->xsi)] = 'xsi';
     }

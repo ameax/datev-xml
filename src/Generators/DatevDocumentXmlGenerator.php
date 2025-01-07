@@ -120,7 +120,7 @@ class DatevDocumentXmlGenerator extends AbstractXmlGenerator
 
     private function getAdditionalFilesExtensionElements(array $documentData): array
     {
-        //<extension xsi:type="File" name="Rechnungsbild_RA_R-2023-101.pdf"/>
+        // <extension xsi:type="File" name="Rechnungsbild_RA_R-2023-101.pdf"/>
         $extensionElements = [];
         foreach ($documentData['filePaths'] as $filePath) {
             $extensionElements[] = [

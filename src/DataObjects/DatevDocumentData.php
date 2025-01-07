@@ -211,7 +211,7 @@ class DatevDocumentData
      */
     public function generateXml(): string
     {
-        $generator = new DatevDocumentXmlGenerator();
+        $generator = new DatevDocumentXmlGenerator;
         $generator->setDatevDocumentData($this);
         $generator->generate();
         $generator->validate();
@@ -221,7 +221,7 @@ class DatevDocumentData
 
     public function generateZip(): string
     {
-        $this->zip = new Zip();
+        $this->zip = new Zip;
         $this->zip->addFromString($this->generateXml(), 'document.xml');
         foreach ($this->data as $dataRow) {
             switch ($dataRow['type']) {

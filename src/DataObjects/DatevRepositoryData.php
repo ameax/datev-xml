@@ -10,8 +10,7 @@ class DatevRepositoryData
         public string $level1 = 'ameax',
         public string $level2 = 'Import {year} {typeShort}',
         public string $level3 = '{month}',
-    ) {
-    }
+    ) {}
 
     public static function make(
         string $level1 = 'ameax',
