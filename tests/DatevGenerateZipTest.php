@@ -80,7 +80,7 @@ it( /**
         datevRepositoryData: $datevRepositoryData);
 
     $zipPath = $datevDocumentData->generateZip();
-    //file_put_contents(__DIR__.'/fixtures/export.zip',file_get_contents($zipPath));
+//    file_put_contents(__DIR__.'/fixtures/export.zip',file_get_contents($zipPath));
     expect($zipPath)->toBeFile();
 
 });

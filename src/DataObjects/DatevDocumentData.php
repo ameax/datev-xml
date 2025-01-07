@@ -245,7 +245,11 @@ class DatevDocumentData
     private function addAdditionalFiles(array $filePaths): void
     {
         foreach ($filePaths as $filePath) {
-            $this->zip->addFile($filePath, basename($filePath));
+            if (is_array($filePath)) {
+                $this->zip->addFile($filePath['path'], $filePath['name']);
+            } else {
+                $this->zip->addFile($filePath, basename($filePath));
+            }
         }
     }
 }
