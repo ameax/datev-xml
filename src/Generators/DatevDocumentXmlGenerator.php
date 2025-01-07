@@ -127,7 +127,7 @@ class DatevDocumentXmlGenerator extends AbstractXmlGenerator
                 'extension' => [
                     'attributes' => [
                         $this->xsi.'type' => 'File',
-                        'name' => basename($filePath),
+                        'name' => is_array($filePath) ? $filePath['name'] : basename($filePath),
                     ],
                 ],
             ];
