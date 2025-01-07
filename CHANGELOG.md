@@ -2,6 +2,10 @@
 
 All notable changes to `datev-xml` will be documented in this file.
 
+## 1.3.2 - 2025-01-07
+
+**Full Changelog**: https://github.com/ameax/datev-xml/compare/1.3.1...1.3.2
+
 ## 1.3.1 - 2025-01-07
 
 ### What's Changed
