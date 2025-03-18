@@ -2,6 +2,15 @@
 
 All notable changes to `datev-xml` will be documented in this file.
 
+## 1.3.3 - 2025-03-18
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/ameax/datev-xml/pull/13
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/ameax/datev-xml/pull/14
+
+**Full Changelog**: https://github.com/ameax/datev-xml/compare/1.3.2...1.3.3
+
 ## 1.3.2 - 2025-01-07
 
 **Full Changelog**: https://github.com/ameax/datev-xml/compare/1.3.1...1.3.2
