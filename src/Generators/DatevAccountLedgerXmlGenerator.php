@@ -38,16 +38,21 @@ class DatevAccountLedgerXmlGenerator extends AbstractXmlGenerator
 
     public function generate(): self
     {
+        $attributes = [
+            'consolidatedAmount' => DatevHelpers::formatAmount($this->datevAccountLedgerData->consolidatedAmount),
+            'consolidatedDate' => $this->datevAccountLedgerData->consolidatedDate->format('Y-m-d'),
+            'consolidatedInvoiceId' => $this->datevAccountLedgerData->consolidatedInvoiceId,
+            'consolidatedDeliveryDate' => $this->datevAccountLedgerData->consolidatedDeliveryDate->format('Y-m-d'),
+            'consolidatedCurrencyCode' => $this->datevAccountLedgerData->consolidatedCurrencyCode,
+        ];
+        if (isset($this->datevAccountLedgerData->consolidatedOrderId)) {
+            $attributes['consolidatedOrderId'] = $this->datevAccountLedgerData->consolidatedOrderId;
+        }
+
         $root = new DatevAccountLedgerRoot(
             [
                 'consolidate' => [
-                    'attributes' => [
-                        'consolidatedAmount' => DatevHelpers::formatAmount($this->datevAccountLedgerData->consolidatedAmount),
-                        'consolidatedDate' => $this->datevAccountLedgerData->consolidatedDate->format('Y-m-d'),
-                        'consolidatedInvoiceId' => $this->datevAccountLedgerData->consolidatedInvoiceId,
-                        'consolidatedDeliveryDate' => $this->datevAccountLedgerData->consolidatedDeliveryDate->format('Y-m-d'),
-                        'consolidatedCurrencyCode' => $this->datevAccountLedgerData->consolidatedCurrencyCode,
-                    ],
+                    'attributes' => $attributes,
                     'value' => $this->mode === self::MODE_RECEIVABLE_LEDGER ? $this->getAccountsReceivableLedgerElements() : $this->getAccountsPayableLedgerElements(),
                 ],
             ],
