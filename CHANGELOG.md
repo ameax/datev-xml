@@ -2,6 +2,20 @@
 
 All notable changes to `datev-xml` will be documented in this file.
 
+## 2.0.0 - 2025-09-16
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/ameax/datev-xml/pull/15
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/ameax/datev-xml/pull/17
+* Carbon update, Laravel 12 support by @raymadrona in https://github.com/ameax/datev-xml/pull/19
+
+### New Contributors
+
+* @raymadrona made their first contribution in https://github.com/ameax/datev-xml/pull/19
+
+**Full Changelog**: https://github.com/ameax/datev-xml/compare/1.3.3...2.0.0
+
 ## 3.0.0 - 2025-09-16
 
 ### What's Changed
