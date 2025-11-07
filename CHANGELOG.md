@@ -2,6 +2,20 @@
 
 All notable changes to `datev-xml` will be documented in this file.
 
+## v2.1.1 - 2025-11-07
+
+### What's Changed
+
+#### Bug Fixes
+
+- Support both Carbon 2.x and 3.x to maintain backward compatibility
+
+#### Details
+
+Version 2.1.0 required Carbon ^3.0, which caused breaking changes in projects still using Carbon 2.x. This patch release relaxes the Carbon requirement to support both `^2.0|^3.0`, allowing projects to upgrade at their own pace.
+
+**Full Changelog**: https://github.com/ameax/datev-xml/compare/2.1.0...2.1.1
+
 ## v2.1.0 - 2025-11-07
 
 ### What's Changed
