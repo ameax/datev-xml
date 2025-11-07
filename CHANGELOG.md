@@ -2,6 +2,30 @@
 
 All notable changes to `datev-xml` will be documented in this file.
 
+## v1.3.4 - 2025-11-07
+
+### What's Changed
+
+#### Features
+
+- Add suffix counter to prevent filename collisions in DATEV exports
+
+#### Details
+
+When multiple receipts generate the same ledger filename (e.g., through the Bornemann plugin modifying consolidatedInvoiceId), files would overwrite each other in the ZIP archive, causing discrepancies between document.xml references and actual files.
+
+This release adds automatic collision detection and resolution by:
+
+- Tracking used filenames in `$usedNames` array
+- Appending `_1`, `_2`, etc. suffixes only when collisions occur
+- Maintaining consistency between document.xml and ZIP contents
+
+**Example:** If two receipts both generate `1005330_AB`, the second becomes `1005330_AB_1` automatically.
+
+This version maintains compatibility with Carbon 2.x (required for Laravel 11 projects that haven't upgraded to Carbon 3.x yet).
+
+**Full Changelog**: https://github.com/ameax/datev-xml/compare/1.3.3...1.3.4
+
 ## v2.1.1 - 2025-11-07
 
 ### What's Changed
