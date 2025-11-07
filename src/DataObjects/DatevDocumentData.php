@@ -24,6 +24,8 @@ class DatevDocumentData
 
     protected Zip $zip;
 
+    protected array $usedNames = [];
+
     public function __construct(
         public ?Carbon $date = null
     ) {
@@ -63,10 +65,21 @@ class DatevDocumentData
 
     private function getLedgerName(DatevAccountLedgerData $datevAccountLedgerData): string
     {
-        $name = $datevAccountLedgerData->consolidatedInvoiceId;
+        $baseName = $datevAccountLedgerData->consolidatedInvoiceId;
         if ($datevAccountLedgerData->costCategoryId) {
-            $name .= '_'.$datevAccountLedgerData->costCategoryId;
+            $baseName .= '_'.$datevAccountLedgerData->costCategoryId;
         }
+
+        // Check if name already exists and add suffix if needed
+        $name = $baseName;
+        $counter = 1;
+        while (isset($this->usedNames[$name])) {
+            $name = $baseName.'_'.$counter;
+            $counter++;
+        }
+
+        // Mark this name as used
+        $this->usedNames[$name] = true;
 
         return $name;
     }
