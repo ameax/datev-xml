@@ -2,6 +2,28 @@
 
 All notable changes to `datev-xml` will be documented in this file.
 
+## v2.1.0 - 2025-11-07
+
+### What's Changed
+
+#### Features
+
+- Add suffix counter to prevent filename collisions in DATEV exports
+
+#### Details
+
+When multiple receipts generate the same ledger filename (e.g., through the Bornemann plugin modifying consolidatedInvoiceId), files would overwrite each other in the ZIP archive, causing discrepancies between document.xml references and actual files.
+
+This release adds automatic collision detection and resolution by:
+
+- Tracking used filenames in `$usedNames` array
+- Appending `_1`, `_2`, etc. suffixes only when collisions occur
+- Maintaining consistency between document.xml and ZIP contents
+
+**Example:** If two receipts both generate `1005330_AB`, the second becomes `1005330_AB_1` automatically.
+
+**Full Changelog**: https://github.com/ameax/datev-xml/compare/2.0.0...2.1.0
+
 ## 2.0.0 - 2025-09-16
 
 ### What's Changed
