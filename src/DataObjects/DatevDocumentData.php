@@ -259,7 +259,11 @@ class DatevDocumentData
     {
         foreach ($filePaths as $filePath) {
             if (is_array($filePath)) {
-                $this->zip->addFile($filePath['path'], $filePath['name']);
+                if (isset($filePath['content'])) {
+                    $this->zip->addFromString($filePath['content'], $filePath['name']);
+                } else {
+                    $this->zip->addFile($filePath['path'], $filePath['name']);
+                }
             } else {
                 $this->zip->addFile($filePath, basename($filePath));
             }
