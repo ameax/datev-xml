@@ -57,7 +57,7 @@ class DatevAccountLedgerData
 
     public function addAccountsReceivableLedger(
         float $amount,
-        string $accountNo,
+        ?string $accountNo = null,
         ?string $buCode = null,
         ?string $information = null,
         ?float $tax = null,
@@ -116,7 +116,7 @@ class DatevAccountLedgerData
 
     public function addAccountsPayableLedger(
         float $amount,
-        string $accountNo,
+        ?string $accountNo = null,
         ?string $buCode = null,
         ?string $information = null,
         ?float $tax = null,
